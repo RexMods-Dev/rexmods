@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motorfest Speedometer — Documentation</title>
+<style>
+  :root{
+    --bg:#121014;
+    --panel:#17151a;
+    --text:#d9d4dc;
+    --text-dim:#938c9a;
+    --line:#2b2731;
+
+    --peach:#E0A286;
+    --cream:#F5D8CB;
+    --mauve:#8B618D;
+    --lilac:#AC80B2;
+    --violet:#8671AE;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:16px;
+    line-height:1.7;
+    padding:60px 20px 100px;
+  }
+
+  .doc{
+    max-width:740px;
+    margin:0 auto;
+  }
+
+  /* Title block */
+  .doc-title{
+    text-align:center;
+    margin-bottom:50px;
+  }
+  .doc-title h1{
+    font-family:Georgia, serif;
+    font-size:2rem;
+    margin:0 0 8px;
+    color:var(--cream);
+    font-weight:normal;
+    letter-spacing:.02em;
+  }
+  .doc-title .by{
+    color:var(--text-dim);
+    font-size:.95rem;
+  }
+  .doc-title .ver{
+    margin-top:14px;
+    display:inline-block;
+    font-size:.8rem;
+    color:var(--peach);
+    border:1px solid var(--line);
+    padding:3px 12px;
+    border-radius:3px;
+    font-family:"Courier New", monospace;
+  }
+
+  hr{
+    border:none;
+    border-top:1px solid var(--line);
+    margin:48px 0;
+  }
+
+  h2{
+    font-family:Georgia, serif;
+    font-size:1.3rem;
+    font-weight:normal;
+    color:var(--cream);
+    border-left:3px solid var(--lilac);
+    padding-left:14px;
+    margin:0 0 20px;
+  }
+
+  h3{
+    font-family:Georgia, serif;
+    font-size:1.05rem;
+    font-weight:normal;
+    color:var(--peach);
+    margin:28px 0 10px;
+  }
+
+  p{ margin:0 0 16px; color:var(--text); }
+
+  a{ color:var(--lilac); text-decoration:underline; }
+  a:hover{ color:var(--peach); }
+
+  ul, ol{ margin:0 0 16px; padding-left:26px; }
+  li{ margin-bottom:6px; }
+
+  strong, b{ color:var(--cream); font-weight:bold; }
+
+  code{
+    font-family:"Courier New", monospace;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:1px 6px;
+    border-radius:3px;
+    color:var(--peach);
+    font-size:.92em;
+  }
+
+  pre{
+    font-family:"Courier New", monospace;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-left:3px solid var(--violet);
+    padding:14px 18px;
+    border-radius:3px;
+    overflow-x:auto;
+    font-size:.88rem;
+    line-height:1.6;
+    color:var(--text);
+    margin:0 0 18px;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:0 0 20px;
+    font-size:.94rem;
+  }
+  th, td{
+    border:1px solid var(--line);
+    padding:9px 14px;
+    text-align:left;
+  }
+  th{
+    background:var(--panel);
+    color:var(--cream);
+    font-weight:normal;
+    font-family:"Courier New", monospace;
+    font-size:.82rem;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+  }
+  td{ color:var(--text); }
+
+  blockquote{
+    margin:0 0 18px;
+    padding:10px 16px;
+    border-left:3px solid var(--peach);
+    background:var(--panel);
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  .toc{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:18px 24px;
+    margin-bottom:50px;
+  }
+  .toc-title{
+    font-family:"Courier New", monospace;
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin-bottom:10px;
+  }
+  .toc ul{ margin:0; padding-left:18px; columns:2; }
+  .toc li{ margin-bottom:5px; font-size:.92rem; }
+  .toc a{ text-decoration:none; }
+  .toc a:hover{ text-decoration:underline; }
+
+  .footer{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+    color:var(--text-dim);
+    font-size:.82rem;
+    font-family:"Courier New", monospace;
+    text-align:center;
+  }
+
+  section{ scroll-margin-top:20px; }
+
+  @media (max-width:600px){
+    body{ padding:36px 16px 70px; font-size:15px; }
+    .toc ul{ columns:1; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="doc-title">
+    <h1>Motorfest Speedometer</h1>
+    <div class="by">by RexMods</div>
+    <div class="ver">Version 1.0</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#features">Core Features</a></li>
+      <li><a href="#assists">Advanced Driving Assists</a></li>
+      <li><a href="#controls">Default Controls</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#troubleshooting">Troubleshooting &amp; Logging</a></li>
+      <li><a href="#credits">Credits</a></li>
+      <li><a href="#support">Support &amp; Usage Guidelines</a></li>
+    </ul>
+  </div>
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>The Motorfest Speedometer brings a highly dynamic, fully customizable, and visually striking HUD to Grand Theft Auto V, inspired by The Crew Motorfest.</p>
+    <p>This mod goes beyond visuals. It features a completely custom built vehicle dynamics system, providing real-time Driving Assists (ABS, ESP and TCS). Whether you are using a keyboard or a controller, the robust input system ensures seamless control over your vehicle and your settings. Everything from the gauge size to the needle sweep arc can be customised in-game via a clean, intuitive menu.</p>
+  </section>
+
+  <hr>
+
+  <section id="features">
+    <h2>Core Features</h2>
+
+    <h3>Motorfest-Inspired UI</h3>
+    <p>A sleek, modern gauge featuring smooth RPM sweeps, speed digits, gear indicators and dynamic needle colour changes at redline.</p>
+
+    <h3>Complete Layout Control</h3>
+    <p>Almost every visual element (gauge, needle, sweep arc, halftone, text, icons, and units) can be resized, repositioned, rotated, and adjusted for opacity directly in-game.</p>
+
+    <h3>Themes</h3>
+    <p>Choose from 6 built-in gauge background themes:</p>
+    <ul>
+      <li>Default</li>
+      <li>Black Shadow</li>
+      <li>Red Accent</li>
+      <li>Yellow Accent</li>
+      <li>Cyan</li>
+      <li>Custom</li>
+    </ul>
+
+    <h3>Flawless Input Handling</h3>
+    <p>Advanced hardware detection ensures that keyboard inputs (like W/A/S/D) never cross-talk or interfere with your Gamepad controls.</p>
+
+    <h3>Immersive HUD Control</h3>
+    <p>Option to automatically hide the vehicle, street name info while the mod is active.</p>
+  </section>
+
+  <hr>
+
+  <section id="assists">
+    <h2>Advanced Driving Assists</h2>
+    <p>The mod includes a custom-tuned vehicle intervention system. These assists are not realistic real-life counterparts, they are game level handling tweaks designed to mimic the behaviour of traction, stability and braking aids. They may be refined further in future updates.</p>
+    <p>The assist states act as true switches: once you enable or disable them, they stay exactly as you set them, regardless of your driving.</p>
+    <p>When an assist is Enabled, it monitors the car. When it becomes Active, the corresponding icon on the speedometer will blink to let you know it is stepping in to help you keep control.</p>
+    <p>Both TCS and ABS feature configurable modes (Mild and Sporty) depending on your driving style.</p>
+
+    <h3>ABS (Assisted Braking System)</h3>
+    <p>Improves braking response and helps you stop smoothly under heavy braking. It does not simulate a true anti-lock system but instead applies a custom brake force adjustment that makes deceleration feel more controlled and responsive, so you can maintain steering while braking.</p>
+
+    <h3>ESP (Electronic Stability Program)</h3>
+    <p>Works at higher speeds to reduce sliding. If the car begins to drift or spin, ESP subtly cuts engine power and applies drag to pull the vehicle back into a straight line. It is a simplified handling aid.</p>
+
+    <h3>TCS (Traction Control System)</h3>
+    <p>Detects excessive wheelspin during hard acceleration and smoothly reduces engine power to help you grip the road. It acts as a power limiter to prevent unwanted wheel slip, giving you more consistent launches.</p>
+
+    <blockquote>Note: These are still not 100% accurate and will depend on the cars handling.</blockquote>
+  </section>
+
+  <hr>
+
+  <section id="controls">
+    <h2>Default Controls</h2>
+    <p>All controls can be fully remapped via the <code>MotorfestSpeedometer.ini</code> file. The mod supports both Keyboard and Controller.</p>
+
+    <h3>Default Keyboard Controls</h3>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>F11</code></td><td>Open the Settings &amp; Layout Menu</td></tr>
+        <tr><td><code>Z</code></td><td>Start / Stop Engine</td></tr>
+        <tr><td><code>NumPad 1</code></td><td>Toggle ABS</td></tr>
+        <tr><td><code>NumPad 2</code></td><td>Toggle ESP</td></tr>
+        <tr><td><code>NumPad 3</code></td><td>Toggle TCS</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Controller Controls</h3>
+    <table>
+      <thead><tr><th>Input</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>Interaction Menu Button (Hold/Press)</td><td>Open Menu</td></tr>
+        <tr><td>D-Pad Down (ScriptRDown)</td><td>Start / Stop Engine</td></tr>
+        <tr><td>D-Pad Up</td><td>Toggle ABS</td></tr>
+        <tr><td>D-Pad Right</td><td>Toggle ESP</td></tr>
+        <tr><td>D-Pad Down</td><td>Toggle TCS</td></tr>
+      </tbody>
+    </table>
+
+    <p>Menu navigation uses standard UI Accept / Cancel / D-Pad controls.</p>
+  </section>
+
+  <hr>
+
+  <section id="installation">
+    <h2>Installation</h2>
+
+    <h3>Step 1 — Install required tools</h3>
+    <ul>
+      <li>Script Hook V — <a href="https://www.dev-c.com/gtav/scripthookv/" target="_blank" rel="noopener">https://www.dev-c.com/gtav/scripthookv/</a></li>
+      <li>Script Hook V .Net — <a href="https://www.gta5-mods.com/tools/script-hook-v-net-enhanced" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/script-hook-v-net-enhanced</a></li>
+      <li>LemonUI — <a href="https://www.gta5-mods.com/tools/lemonui" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/lemonui</a> (place <code>LemonUI.SHVDN3.dll</code> in your "scripts" folder)</li>
+    </ul>
+
+    <h3>Step 2 — Copy the mod files</h3>
+    <p>Place <code>MotorfestSpeedometer.dll</code> and <code>MotorfestSpeedometer.ini</code> into your GTA V "scripts" folder.</p>
+
+    <h3>Step 3 — Install the texture pack (OpenIV required)</h3>
+    <p>Open OpenIV and navigate to:</p>
+    <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
+    <p>Drag and drop the provided texture dictionaries (<code>MotorfestGauge.ytd</code> and <code>MotorfestDigits.ytd</code>) into this folder.</p>
+    <p>Launch the game, enter a vehicle, and press <code>F11</code> to open the menu.</p>
+  </section>
+
+  <hr>
+
+  <section id="troubleshooting">
+    <h2>Troubleshooting &amp; Logging</h2>
+    <p>This mod includes a highly detailed, lightweight diagnostic logger.</p>
+    <p>If the mod fails to load, crashes, or an assist behaves unexpectedly, navigate to your scripts folder and open <code>MFLog.txt</code>.</p>
+    <p>This file strictly records:</p>
+    <ul>
+      <li>Script initialisation</li>
+      <li>Configuration loading</li>
+      <li>Explicit input commands</li>
+      <li>Any critical errors</li>
+    </ul>
+    <p>If you need to report a bug, please include the contents of this log file to help pinpoint the issue immediately.</p>
+  </section>
+
+  <hr>
+
+  <section id="credits">
+    <h2>Credits</h2>
+    <table>
+      <tbody>
+        <tr><td>Developer</td><td>Rex Mods</td></tr>
+        <tr><td>LemonUI framework</td><td>justalemon</td></tr>
+        <tr><td>Script Hook V .Net</td><td>Chiheb-Bacha</td></tr>
+        <tr><td>Script Hook V</td><td>Alexander Blade</td></tr>
+        <tr><td>Community resources and help</td><td>JulioNIB</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr>
+
+  <section id="support">
+    <h2>Support &amp; Usage Guidelines</h2>
+    <ul>
+      <li>If you encounter any bugs, please report them in my discord with details from your <code>MFLog.txt</code>.</li>
+      <li>Please respect the time and effort put into this project by not reuploading this mod to other websites or including it in public mod packs without asking first.</li>
+      <li>You are completely free to use this mod, but please do not distribute altered versions or claim the work as your own. If you want to share this mod with others, please link them directly to the original download page.</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    Motorfest Speedometer — Version 1.0 — RexMods
+  </div>
+
+</div>
+</body>
+</html>
