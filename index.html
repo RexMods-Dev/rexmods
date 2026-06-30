@@ -1321,6 +1321,47 @@ footer {
   </div>
 </section>
 
+ <section id="featured-motorfest">
+  <div class="container">
+    <p class="section-label reveal">Featured</p>
+    <h2 class="section-title reveal">Motorfest Speedometer</h2>
+
+    <div class="featured-card reveal" style="transition-delay:0.1s;margin-top:32px;">
+
+      <div class="featured-image" id="featuredImage2">
+        <div class="featured-image-placeholder" id="featuredPlaceholder2">
+          <span>Feature Image</span>
+        </div>
+        <div class="featured-image-overlay"></div>
+      </div>
+
+      <div class="featured-body">
+        <span class="badge badge-active">Active Development — V1.2</span>
+
+        <h3 class="featured-title">Forza Styled Speedometer</h3>
+
+        <p class="featured-desc">
+         Experience the HUD of The Crew Motorfest inside GTA V. This mod brings a modern, high precision speedometer with fully customizable visuals and a custom-tuned driving assist system.
+        </p>
+
+        <div class="featured-features">
+          <span class="feature-chip">Realistic RPM</span>
+          <span class="feature-chip">Driving Assists</span>
+          <span class="feature-chip">Needle RPM Arc</span>
+          <span class="feature-chip">Controller Support</span>
+          <span class="feature-chip">Blinking Assist Icons</span>
+          <span class="feature-chip">Customizable Layouts</span>
+        </div>
+
+        <a href="https://www.gta5-mods.com/scripts/motorfest-speedometer-rex-mods" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="mods">
   <div class="container">
     <p class="section-label reveal">Releases</p>
@@ -1408,30 +1449,6 @@ footer {
     </div>
   </div>
 </section>
-
-<section id="upcoming">
-  <div class="container">
-    <p class="section-label reveal">In Development</p>
-    <h2 class="section-title reveal">Upcoming Projects</h2>
-    <p class="section-desc reveal" style="transition-delay:0.1s;">Projects currently being worked on. Details may change as development continues.</p>
-
-    <div class="upcoming-grid">
-
-      <div class="upcoming-card reveal" style="transition-delay:0.1s;">
-        <div class="upcoming-image" id="upcomingImage1">
-          <div class="upcoming-image-placeholder" id="upcomingPlaceholder1">
-            <span>Preview Image</span>
-          </div>
-          <div class="upcoming-image-overlay"></div>
-        </div>
-        <div class="upcoming-body">
-          <span class="badge badge-upcoming">In Development</span>
-          <p class="upcoming-title">The Crew Motorfest Speedometer</p>
-          <p class="upcoming-desc">A new speedometer inspired by The Crew Motorfest, designed to capture approximately 70% of its visual style while maintaining smooth performance. 
-            The mod is currently in the texture development phase, with ongoing work focused on refining its texture assets and overall quality.</p>
-          <p class="upcoming-disclaimer">This preview represents an early concept design. It is not an in-game screenshot and the final version may differ from what is shown here.</p>
-        </div>
-      </div>
 
       <div class="upcoming-card upcoming-card-placeholder reveal" style="transition-delay:0.2s;">
         <div class="upcoming-image">
@@ -1709,6 +1726,7 @@ window.addEventListener('scroll', () => {
 
 const HERO_IMAGE_URL      = 'https://i.ibb.co/chfrzj6L/Still-2026-06-20-152428-3-1-1.png';
 const FEATURED_IMAGE_URL  = 'https://i.ibb.co/jkZWKpwj/Banner.png';
+const FEATURED2_IMAGE_URL  = 'https://i.ibb.co/j9Qjt4q4/Crew-Speedo.png';
 const LOGO_IMAGE_URL      = 'https://i.ibb.co/vCDRW1jV/Logo.png';
 const UPCOMING_1_IMAGE_URL = 'https://i.ibb.co/Swx5d9Nv/Crew-Speedo.png';
 
@@ -1719,6 +1737,11 @@ if (FEATURED_IMAGE_URL) {
   const fi = document.getElementById('featuredImage');
   fi.style.backgroundImage = `url('${FEATURED_IMAGE_URL}')`;
   document.getElementById('featuredPlaceholder').style.display = 'none';
+}
+if (FEATURED2_IMAGE_URL) {
+  const fi2 = document.getElementById('featuredImage2');
+  fi2.style.backgroundImage = `url('${FEATURED2_IMAGE_URL}')`;
+  document.getElementById('featuredPlaceholder2').style.display = 'none';
 }
 if (LOGO_IMAGE_URL) {
   const logo = document.getElementById('navLogo');
