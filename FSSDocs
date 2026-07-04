@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forza Styled Speedometer — Documentation</title>
+<style>
+  :root {
+    --bg:       #121014;
+    --panel:    #17151a;
+    --text:     #d9d4dc;
+    --text-dim: #938c9a;
+    --line:     #2b2731;
+
+    --peach:  #E0A286;
+    --cream:  #F5D8CB;
+    --mauve:  #8B618D;
+    --lilac:  #AC80B2;
+    --violet: #8671AE;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 1.75;
+    padding: 60px 20px 100px;
+  }
+
+  .doc {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ── Title block ── */
+  .doc-title {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .doc-title h1 {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    margin: 0 0 8px;
+    color: var(--cream);
+    font-weight: normal;
+    letter-spacing: .02em;
+  }
+  .doc-title .by {
+    color: var(--text-dim);
+    font-size: .95rem;
+  }
+  .doc-title .ver {
+    margin-top: 14px;
+    display: inline-block;
+    font-size: .8rem;
+    color: var(--peach);
+    border: 1px solid var(--line);
+    padding: 3px 12px;
+    border-radius: 3px;
+    font-family: "Courier New", monospace;
+  }
+
+  /* ── Table of contents ── */
+  .toc {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 26px;
+    margin-bottom: 52px;
+  }
+  .toc-title {
+    font-family: "Courier New", monospace;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 20px;
+    columns: 2;
+    column-gap: 32px;
+  }
+  .toc li { margin-bottom: 5px; font-size: .92rem; break-inside: avoid; }
+  .toc a { text-decoration: none; color: var(--lilac); }
+  .toc a:hover { text-decoration: underline; color: var(--peach); }
+
+  /* ── Dividers & sections ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 50px 0;
+  }
+
+  section { scroll-margin-top: 20px; }
+
+  /* ── Headings ── */
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: var(--cream);
+    border-left: 3px solid var(--lilac);
+    padding-left: 14px;
+    margin: 0 0 22px;
+  }
+
+  h3 {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: normal;
+    color: var(--peach);
+    margin: 30px 0 10px;
+  }
+
+  h4 {
+    font-family: "Courier New", monospace;
+    font-size: .88rem;
+    font-weight: normal;
+    color: var(--lilac);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: 24px 0 8px;
+  }
+
+  /* ── Body text ── */
+  p { margin: 0 0 16px; }
+
+  a { color: var(--lilac); text-decoration: underline; }
+  a:hover { color: var(--peach); }
+
+  ul, ol { margin: 0 0 16px; padding-left: 26px; }
+  li { margin-bottom: 6px; }
+
+  strong, b { color: var(--cream); font-weight: bold; }
+  em { color: var(--text-dim); }
+
+  /* ── Inline code ── */
+  code {
+    font-family: "Courier New", monospace;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--peach);
+    font-size: .91em;
+  }
+
+  /* ── Code / path blocks ── */
+  pre {
+    font-family: "Courier New", monospace;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--violet);
+    padding: 14px 18px;
+    border-radius: 3px;
+    overflow-x: auto;
+    font-size: .87rem;
+    line-height: 1.65;
+    color: var(--text);
+    margin: 0 0 18px;
+  }
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0 0 22px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .92rem;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 9px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--panel);
+    color: var(--cream);
+    font-weight: normal;
+    font-family: "Courier New", monospace;
+    font-size: .8rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  td { color: var(--text); }
+  td:first-child {
+    font-family: "Courier New", monospace;
+    color: var(--peach);
+    white-space: nowrap;
+    font-size: .88rem;
+  }
+
+  /* ── Callouts ── */
+  .note {
+    margin: 0 0 20px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--peach);
+    background: var(--panel);
+    color: var(--text-dim);
+    font-size: .93rem;
+  }
+  .warning {
+    margin: 0 0 20px;
+    padding: 12px 16px;
+    border-left: 3px solid #c0584f;
+    background: var(--panel);
+    color: var(--text-dim);
+    font-size: .93rem;
+  }
+  .warning strong { color: #e07070; }
+
+  /* ── Section label (ini group header) ── */
+  .ini-group {
+    font-family: "Courier New", monospace;
+    font-size: .82rem;
+    letter-spacing: .06em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 6px;
+    margin: 36px 0 14px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: .82rem;
+    font-family: "Courier New", monospace;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 36px 16px 70px; font-size: 15px; }
+    .toc ol { columns: 1; }
+    td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="doc-title">
+    <h1>Forza Styled Speedometer</h1>
+    <div class="by">by RexMods</div>
+    <div class="ver">Version 1.2</div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#whats-new">What's New in v1.2</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#updating">Updating from v1.1</a></li>
+      <li><a href="#controls">Default Controls</a></li>
+      <li><a href="#driving-aids">Driving Aids</a></li>
+      <li><a href="#ini-reference">INI Configuration Reference</a></li>
+      <li><a href="#credits">Credits</a></li>
+      <li><a href="#licence">Licence & Usage</a></li>
+      <li><a href="#support">Support</a></li>
+    </ol>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>A fully customisable Forza Horizon 5-style speedometer for GTA V. The needle sweeps like an ignition check, follows RPM, wobbles at the rev limiter, and shows your speed on three clean digits.</p>
+    <p>Driving aids (ABS, Traction Control, Launch Control) work in the background and blink on the gauge. Everything can be adjusted through the in-game menu by pressing <code>F11</code>.</p>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="whats-new">
+    <h2>What's New in v1.2</h2>
+
+    <h3>New Features</h3>
+    <ul>
+      <li>Controller vibration at the redline (adjustable or off)</li>
+      <li>Gamepad menu control — open the menu with a controller</li>
+      <li>Two speed display modes: classic text or crisp texture digits (both movable and scalable)</li>
+      <li>Hide vanilla HUD — remove the default street/vehicle name for a clean view</li>
+      <li>Reload Configuration button — apply <code>.ini</code> changes without restarting the game</li>
+      <li>Smarter logging with adjustable detail and a separate crash-only error file</li>
+    </ul>
+
+    <h3>Improvements</h3>
+    <ul>
+      <li>Better ignition sweep — needle rises to a peak then gently settles to real RPM</li>
+      <li>Smoother engine-off — needle glides back to zero naturally</li>
+      <li>More layout options — extra controls for texture digits and speed text scale</li>
+      <li>Rumble can be toggled and its strength changed in the menu</li>
+    </ul>
+
+    <h3>Stability</h3>
+    <ul>
+      <li>Much smoother on lower-end PCs</li>
+      <li>Fixed the micro-stutters that used to happen when moving sliders or changing settings rapidly</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="requirements">
+    <h2>Requirements</h2>
+    <ul>
+      <li><strong>Script Hook V</strong></li>
+      <li><strong>Script Hook V .NET</strong></li>
+      <li><strong>LemonUI</strong> — place <code>LemonUI.SHVDN3.dll</code> in your <code>scripts</code> folder</li>
+      <li><strong>OpenIV</strong> — required for texture installation</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="installation">
+    <h2>Installation</h2>
+    <p>Two installation methods are available. Choose whichever you prefer.</p>
+
+    <h3>Manual Installation</h3>
+    <ol>
+      <li>Install the required tools: Script Hook V, Script Hook V .NET, and LemonUI. Place <code>LemonUI.SHVDN3.dll</code> in your <code>scripts</code> folder.</li>
+      <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> into your GTA V <code>scripts</code> folder.</li>
+      <li>Use OpenIV to place <code>ForzaSpeedometerFH5.ytd</code> inside:
+        <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
+      </li>
+      <li>Launch the game and press <code>F11</code>.</li>
+    </ol>
+
+    <h3>OIV Installation (OpenIV Package)</h3>
+    <ol>
+      <li>Double-click the <code>.oiv</code> file. OpenIV will open automatically.</li>
+      <li>Click <strong>Install</strong> and choose your GTA V folder.</li>
+      <li>The package installs everything automatically.</li>
+    </ol>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="updating">
+    <h2>Updating from v1.1</h2>
+    <ol>
+      <li>Delete the old <code>FSS.dll</code> and <code>FSS.ini</code> from your <code>scripts</code> folder.</li>
+      <li>Copy the new <code>FSS.dll</code> and <code>FSS.ini</code> into <code>scripts</code>.</li>
+      <li>Replace <code>ForzaSpeedometerFH5.ytd</code> using OpenIV (inside the <code>scaleform_generic.rpf</code> archive) with the new version.</li>
+      <li>Launch the game.</li>
+    </ol>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="controls">
+    <h2>Default Controls</h2>
+    <p>All controls can be changed in <code>FSS.ini</code> or via the in-game menu.</p>
+
+    <h3>Keyboard</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>F11</td><td>Open settings menu</td></tr>
+          <tr><td>Z</td><td>Start / stop engine</td></tr>
+          <tr><td>Numpad 1</td><td>Toggle Launch Control</td></tr>
+          <tr><td>Numpad 2</td><td>Toggle Traction Control</td></tr>
+          <tr><td>Numpad 3</td><td>Toggle ABS</td></tr>
+          <tr><td>L</td><td>Toggle reverse mode (if Manual Reverse is enabled)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Gamepad</h3>
+    <p>Hold <code>ScriptRRight</code> and press <code>PhoneUp</code> to open the menu.</p>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="driving-aids">
+    <h2>Driving Aids</h2>
+
+    <h3>ABS — Assisted Braking System</h3>
+    <p>Provides braking assistance under heavy stopping. <strong>Slim mode</strong> gives moderate stopping help. <strong>Aggressive mode</strong> provides faster, stronger stopping power.</p>
+
+    <h3>Launch Control</h3>
+    <p>Prevents wheelspin when accelerating from a stop, giving more consistent launches.</p>
+
+    <h3>Traction Control</h3>
+    <p>Cuts engine power if the wheels lose grip. <strong>Sport</strong> allows light wheelspin. <strong>Aggressive</strong> catches wheelspin instantly.</p>
+
+    <h3>Manual Reverse</h3>
+    <p>When enabled, the game will not reverse automatically. Press <code>L</code> to enter reverse mode manually.</p>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="ini-reference">
+    <h2>INI Configuration Reference</h2>
+    <p>This section documents every setting inside <code>FSS.ini</code>. No coding knowledge is required — open the file with Notepad, find the setting you want, and change it. You can also adjust most settings through the in-game menu (<code>F11</code>). Edit the <code>.ini</code> file only if you prefer to type exact numbers or cannot open the menu.</p>
+
+    <!-- [Global] -->
+    <div class="ini-group">[Global]</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Default</th><th>Options</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MasterEnable</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td><strong>True</strong> = speedometer is on. <strong>False</strong> = everything is switched off.</td>
+          </tr>
+          <tr>
+            <td>EngineKey</td>
+            <td>Z</td>
+            <td>Any key</td>
+            <td>Keyboard key that starts or stops the engine. Can be any key such as <code>E</code>, <code>X</code>, etc.</td>
+          </tr>
+          <tr>
+            <td>EnableManualEngineControl</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td><strong>True</strong> = you decide when the engine is on or off using the EngineKey. <strong>False</strong> = the game handles the engine normally; the speedometer still shows RPM but you cannot turn the engine off with your key.</td>
+          </tr>
+          <tr>
+            <td>UseMPH</td>
+            <td>False</td>
+            <td>True / False</td>
+            <td><strong>False</strong> = speed shown in km/h. <strong>True</strong> = speed shown in mph.</td>
+          </tr>
+          <tr>
+            <td>LogLevel</td>
+            <td>Info</td>
+            <td>Debug / Info / Warning / Error</td>
+            <td>Controls how much detail is written to <code>scripts\FFSlog.txt</code>. <strong>Info</strong> is recommended for normal use. See warning below.</td>
+          </tr>
+          <tr>
+            <td>EnablePerformanceProfiler</td>
+            <td>False</td>
+            <td>True / False</td>
+            <td>Advanced testing only. When <strong>True</strong>, writes frame times to <code>scripts\FSS_Profile.csv</code>. Keep <strong>False</strong> unless you are checking performance.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warning">
+      <strong>Warning — LogLevel = Debug</strong><br>
+      Setting LogLevel to <code>Debug</code> makes the mod write every tiny action to <code>scripts\FFSlog.txt</code>. The file grows very quickly — after a few hours of gameplay it can reach hundreds of megabytes.<br><br>
+      Only use Debug mode if you are trying to find a recurring bug or crash, and switch back to <code>Info</code> as soon as you finish. If you forget and the log becomes too large, the mod will automatically archive it to <code>FFSlog.old</code>, but you can also safely delete both files at any time.
+    </div>
+
+    <!-- [Keyboard] -->
+    <div class="ini-group">[Keyboard]</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MenuKey</td>
+            <td>F11</td>
+            <td>Key that opens the mod menu. Can be changed to any key such as <code>F10</code>.</td>
+          </tr>
+          <tr>
+            <td>EngineKey</td>
+            <td>Z</td>
+            <td>Key to start/stop the engine. Overrides the Global EngineKey if you want different behaviour.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [Gamepad] -->
+    <div class="ini-group">[Gamepad]</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ModifierMenu</td>
+            <td>ScriptRRight</td>
+            <td>The button you <strong>hold</strong> on a controller to open the menu together with KeyMenu.</td>
+          </tr>
+          <tr>
+            <td>KeyMenu</td>
+            <td>PhoneUp</td>
+            <td>The button you <strong>press</strong> while holding the modifier to open the menu.</td>
+          </tr>
+          <tr>
+            <td>EnableRumble</td>
+            <td>True</td>
+            <td>Master switch for all gamepad vibration. <strong>False</strong> turns off all rumble.</td>
+          </tr>
+          <tr>
+            <td>RumbleStrength</td>
+            <td>0.5</td>
+            <td>How strong the controller vibrates. <code>0.0</code> = no vibration, <code>1.0</code> = maximum. Accepts decimals such as <code>0.3</code> or <code>0.8</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [Visuals] -->
+    <div class="ini-group">[Visuals]</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Default</th><th>Options</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SpeedDisplayMode</td>
+            <td>0</td>
+            <td>0 / 1</td>
+            <td><strong>0</strong> = Classic text digits (smooth, simple). <strong>1</strong> = High-quality textured digits (sharper, more Forza-like).</td>
+          </tr>
+          <tr>
+            <td>HideVanillaVehicleInfo</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td><strong>True</strong> hides the default vehicle name, area name, and street name from the bottom-right of the screen. <strong>False</strong> leaves the vanilla HUD visible.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [CarControl] -->
+    <div class="ini-group">[CarControl]</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Default</th><th>Options</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EnableCarControl</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td>Master switch for all driving aids. <strong>True</strong> enables ABS, Traction Control, and Launch Control. <strong>False</strong> disables all of them.</td>
+          </tr>
+          <tr>
+            <td>AllowBurnouts</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td><strong>True</strong> allows wheel spin when holding brake and throttle at very low speed. <strong>False</strong> prevents burnouts completely.</td>
+          </tr>
+          <tr>
+            <td>NeedleMotorMode</td>
+            <td>0</td>
+            <td>0 / 1</td>
+            <td>Controls how the needle moves. <strong>0</strong> = PMDC (Slow Fall) — needle drops gently, like an older car. <strong>1</strong> = Stepper (Precise) — needle tracks RPM more sharply.</td>
+          </tr>
+          <tr>
+            <td>ABSEnabled</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td>Turns ABS on or off. Only active when EnableCarControl is True.</td>
+          </tr>
+          <tr>
+            <td>ABSMode</td>
+            <td>0</td>
+            <td>0 / 1</td>
+            <td><strong>0</strong> = Slim — moderate stopping help. <strong>1</strong> = Aggressive — faster, stronger stopping power.</td>
+          </tr>
+          <tr>
+            <td>LCEnabled</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td>Turns Launch Control on or off.</td>
+          </tr>
+          <tr>
+            <td>TCSEnabled</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td>Turns Traction Control on or off.</td>
+          </tr>
+          <tr>
+            <td>TCSMode</td>
+            <td>0</td>
+            <td>0 / 1</td>
+            <td><strong>0</strong> = Sport — allows a little wheelspin. <strong>1</strong> = Aggressive — catches wheelspin quickly.</td>
+          </tr>
+          <tr>
+            <td>ManualReverseEnabled</td>
+            <td>True</td>
+            <td>True / False</td>
+            <td><strong>True</strong> = the game does not automatically reverse; press the Reverse key to enter reverse mode. <strong>False</strong> = the game controls reverse normally.</td>
+          </tr>
+          <tr>
+            <td>KeyToggleABS</td>
+            <td>NumPad3</td>
+            <td>Any key</td>
+            <td>Keyboard key to toggle ABS on or off.</td>
+          </tr>
+          <tr>
+            <td>KeyToggleLC</td>
+            <td>NumPad1</td>
+            <td>Any key</td>
+            <td>Keyboard key to toggle Launch Control on or off.</td>
+          </tr>
+          <tr>
+            <td>KeyToggleTCS</td>
+            <td>NumPad2</td>
+            <td>Any key</td>
+            <td>Keyboard key to toggle Traction Control on or off.</td>
+          </tr>
+          <tr>
+            <td>KeyToggleReverse</td>
+            <td>L</td>
+            <td>Any key</td>
+            <td>Keyboard key to toggle manual reverse mode.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- [FH5] -->
+    <div class="ini-group">[FH5] — Layout & Position Settings</div>
+    <p>Everything in this section controls where each part of the speedometer appears on screen and how large it is. All values can be adjusted through the in-game menu (<code>F11 → FH5 Theme submenu</code>). Only edit these manually if you need to enter exact coordinates.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Setting</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Global_Scale</td>
+            <td>Scales the entire speedometer uniformly. <code>1.0</code> = normal size, <code>1.5</code> = 50% larger.</td>
+          </tr>
+          <tr>
+            <td>Global_OffsetX</td>
+            <td>Moves the entire speedometer left or right.</td>
+          </tr>
+          <tr>
+            <td>Global_OffsetY</td>
+            <td>Moves the entire speedometer up or down.</td>
+          </tr>
+          <tr>
+            <td>Gauge_X / Gauge_Y</td>
+            <td>Position of the main gauge disc on screen.</td>
+          </tr>
+          <tr>
+            <td>Gauge_Size</td>
+            <td>Size of the main gauge disc.</td>
+          </tr>
+          <tr>
+            <td>Speed_X / Speed_Y</td>
+            <td>Position of the speed digits in classic text mode.</td>
+          </tr>
+          <tr>
+            <td>Speed_Scale</td>
+            <td>Size of the speed digits in classic text mode.</td>
+          </tr>
+          <tr>
+            <td>TexSpeed_X / TexSpeed_Y</td>
+            <td>Position of the speed digits in texture mode.</td>
+          </tr>
+          <tr>
+            <td>TexSpeed_Scale</td>
+            <td>Size of the speed digits in texture mode.</td>
+          </tr>
+          <tr>
+            <td>Needle_StartAngle</td>
+            <td>Angle at which the needle rests when at zero RPM.</td>
+          </tr>
+          <tr>
+            <td>WobbleAmp</td>
+            <td>Amplitude of the needle wobble at the rev limiter.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">All remaining values in the [FH5] section control the look and feel of the gauge. The easiest way to explore them is through the in-game menu.</div>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="credits">
+    <h2>Credits</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><td>Developer</td><td>Rex Mods — code, textures, logging system</td></tr>
+          <tr><td>Language</td><td>C#</td></tr>
+          <tr><td>Framework</td><td>ScriptHookVDotNet</td></tr>
+          <tr><td>Menu Library</td><td>LemonUI — justalemon</td></tr>
+          <tr><td>Script Hook V</td><td>Alexander Blade</td></tr>
+          <tr><td>Texture Editing</td><td>OpenIV / DDS workflow</td></tr>
+          <tr><td>Configuration</td><td>INI</td></tr>
+          <tr><td>Font</td><td>Secuela — used under the SIL Open Font License (OFL)</td></tr>
+          <tr><td>Inspiration</td><td>JulioNIB</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="licence">
+    <h2>Licence & Usage</h2>
+    <ul>
+      <li>Free for personal, non-commercial use.</li>
+      <li>Do not re-upload or redistribute without permission.</li>
+      <li>Do not include in mod packs without prior consent.</li>
+      <li>Do not distribute altered versions or claim the work as your own.</li>
+      <li>Share the original download link instead of reuploading.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="support">
+    <h2>Support</h2>
+    <p>If something crashes or behaves unexpectedly, check <code>scripts\FFSlog.txt</code> or <code>FFS_Errors.log</code> first. For bugs or questions, join the Discord server or leave a comment on the mod page.</p>
+  </section>
+
+  <div class="footer">
+    Forza Styled Speedometer — v1.2 — RexMods 2026
+  </div>
+
+</div>
+</body>
+</html>
