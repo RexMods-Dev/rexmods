@@ -334,7 +334,7 @@
     <h2>Installation</h2>
     <p>Two installation methods are available. Choose whichever you prefer.</p>
 
-    <h3>Manual Installation</h3>
+    <h3>Installation</h3>
     <ol>
       <li>Install the required tools: Script Hook V, Script Hook V .NET, and LemonUI. Place <code>LemonUI.SHVDN3.dll</code> in your <code>scripts</code> folder.</li>
       <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> into your GTA V <code>scripts</code> folder.</li>
@@ -342,13 +342,6 @@
         <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
       </li>
       <li>Launch the game and press <code>F11</code>.</li>
-    </ol>
-
-    <h3>OIV Installation (OpenIV Package)</h3>
-    <ol>
-      <li>Double-click the <code>.oiv</code> file. OpenIV will open automatically.</li>
-      <li>Click <strong>Install</strong> and choose your GTA V folder.</li>
-      <li>The package installs everything automatically.</li>
     </ol>
   </section>
 
