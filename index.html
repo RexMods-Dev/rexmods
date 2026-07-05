@@ -1180,6 +1180,23 @@ footer {
   .upcoming-grid { grid-template-columns: 1fr; }
 }
 
+.caution-box {
+  background: rgba(245,198,75,0.07);
+  border: 1px solid rgba(245,198,75,0.35);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #f5d79b;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+.caution-box strong {
+  color: #f5c64b;
+  font-weight: 600;
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .hero-title::before, .hero-title::after { animation: none; }
   .badge-active::before, .badge-upcoming::before { animation: none; }
@@ -1337,13 +1354,18 @@ footer {
       </div>
 
       <div class="featured-body">
-        <span class="badge badge-active">Active Development — V1.0</span>
+        <span class="badge badge-pulled">Pulled — Fix In Progress</span>
 
         <h3 class="featured-title">Motorfest Speedometer</h3>
 
         <p class="featured-desc">
-         Experience the HUD of The Crew Motorfest inside GTA V. This mod brings a modern, high precision speedometer with fully customizable visuals and a custom-tuned driving assist system.
+          Experience the HUD of The Crew Motorfest inside GTA V. This mod brings a modern, high‑precision speedometer with fully customizable visuals and a custom‑tuned driving assist system.
         </p>
+
+        <div class="caution-box">
+          <strong>⚠️ This mod has been temporarily pulled.</strong><br>
+          We discovered a crash that occurs when changing opacity settings. A proper, stable fix is being prepared. The mod will be re‑released as soon as it’s ready. Thank you for your patience!
+        </div>
 
         <div class="featured-features">
           <span class="feature-chip">Realistic RPM</span>
@@ -1354,15 +1376,12 @@ footer {
           <span class="feature-chip">Customizable Layouts</span>
         </div>
 
-        <a href="https://www.gta5-mods.com/scripts/motorfest-speedometer-rex-mods" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download
-        </a>
+        <span class="btn btn-ghost" style="opacity:0.6;cursor:default;pointer-events:none;">Currently Unavailable</span>
       </div>
     </div>
   </div>
 </section>
-
+  
 <section id="mods">
   <div class="container">
     <p class="section-label reveal">Releases</p>
