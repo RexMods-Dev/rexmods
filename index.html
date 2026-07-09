@@ -15,6 +15,7 @@
   --violet-deep:#8B618D;
   --orchid:     #AC80B2;
   --slate:      #8671AE;
+  --amber:      #E0B25F;
 
   --bg:         #09070F;
   --bg-2:       #0F0B18;
@@ -158,6 +159,20 @@ img { display: block; max-width: 100%; }
   background: var(--coral);
   box-shadow: 0 0 8px var(--coral);
   animation: pulse-dot 2.5s ease infinite;
+}
+
+.badge-pulled {
+  background: rgba(224,178,95,0.1);
+  border: 1px solid rgba(224,178,95,0.35);
+  color: var(--amber);
+}
+.badge-pulled::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
 }
 
 @keyframes pulse-dot {
@@ -471,7 +486,7 @@ section { padding: 100px 0; }
   font-weight: 500;
 }
 
-#featured { background: var(--bg); }
+#featured, #featured-motorfest { background: var(--bg); }
 
 .featured-card {
   border-radius: var(--radius-xl);
@@ -554,6 +569,228 @@ section { padding: 100px 0; }
   font-size: 12px;
   font-weight: 500;
   color: var(--orchid);
+}
+
+.featured-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---- Development Progress Modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(9,7,15,0.86);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 620px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px 40px 36px;
+  position: relative;
+  transform: translateY(18px) scale(0.98);
+  transition: transform 0.28s ease;
+}
+.modal-overlay.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+.modal-close:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.08);
+  border-color: var(--border-hover);
+}
+
+.modal-eyebrow {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 10px;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 25px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.modal-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 30px;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.progress-track-wrap { margin-bottom: 30px; }
+.progress-track-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.progress-track-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.progress-track-percent {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--coral);
+}
+.progress-track {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.progress-track-fill {
+  height: 100%;
+  border-radius: 99px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--coral), var(--orchid));
+  transition: width 0.7s ease;
+}
+
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.015);
+  border-bottom: 1px solid var(--border);
+}
+.milestone-item:last-child { border-bottom: none; }
+
+.milestone-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+.milestone-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+.milestone-status-text {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.milestone-complete .milestone-icon {
+  background: rgba(172,128,178,0.15);
+  border: 1px solid var(--orchid);
+  color: var(--orchid);
+}
+.milestone-complete .milestone-status-text { color: var(--orchid); }
+
+.milestone-in-progress .milestone-icon {
+  background: rgba(224,178,95,0.15);
+  border: 1px solid var(--amber);
+  color: var(--amber);
+}
+.milestone-in-progress .milestone-status-text { color: var(--amber); }
+
+.milestone-planned .milestone-icon {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.milestone-planned .milestone-status-text { color: var(--text-dim); }
+
+.milestone-tba .milestone-icon {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed var(--border);
+  color: var(--text-dim);
+}
+.milestone-tba .milestone-status-text { color: var(--text-dim); }
+
+.modal-note {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.75;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: rgba(134,113,174,0.05);
+  border-left: 2px solid rgba(134,113,174,0.35);
+}
+.modal-note strong { color: var(--blush); font-weight: 600; }
+
+.modal-updated {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .modal-card { padding: 32px 24px 28px; }
 }
 
 #mods { background: var(--bg-2); }
@@ -1266,33 +1503,6 @@ footer {
   </div>
 </section>
 
-<section id="about">
-  <div class="container">
-    <p class="section-label reveal">Background</p>
-    <h2 class="section-title reveal">How it started</h2>
-
-    <div class="about-content reveal" style="transition-delay:0.1s;">
-      <p>
-        The <strong>Forza Styled Speedometer</strong> project originally started in 2021. At the time
-        there were a lot of requests from the community for a Forza Horizon style speedometer in GTA V,
-        and that was enough motivation to give it a try.
-      </p>
-      <p>
-        One of the main reasons the project got off the ground was <strong>JulioNIB's speedometer tutorial</strong>
-        and the help he provided. Without that it probably wouldn't have gone anywhere.
-      </p>
-      <p>
-        The original version was eventually abandoned due to texture issues and other technical limitations.
-        The project sat unfinished for a while before I decided to come back to it.
-      </p>
-      <p>
-        When I returned, I restarted everything from scratch. After a lot of redesigning, texturing
-        and testing, the project became what it is today — the current <strong>Forza Styled Speedometer</strong>.
-      </p>
-    </div>
-  </div>
-</section>
-
 <section id="featured">
   <div class="container">
     <p class="section-label reveal">Featured</p>
@@ -1326,22 +1536,20 @@ footer {
           <span class="feature-chip">Customizable Layouts</span>
         </div>
 
-        <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download
-        </a>
-        <a href="https://gofile.io/d/xT6FMb" target="_blank" rel="noopener" class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Beta V1.2
-        </a>
+        <div class="featured-actions">
+          <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download v1.2
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
- <section id="featured-motorfest">
+<section id="featured-motorfest">
   <div class="container">
-    <p class="section-label reveal">Featured</p>
+    <p class="section-label reveal">In Progress</p>
     <h2 class="section-title reveal">Motorfest Speedometer</h2>
 
     <div class="featured-card reveal" style="transition-delay:0.1s;margin-top:32px;">
@@ -1359,12 +1567,12 @@ footer {
         <h3 class="featured-title">Motorfest Speedometer</h3>
 
         <p class="featured-desc">
-          Experience the HUD of The Crew Motorfest inside GTA V. This mod brings a modern, high‑precision speedometer with fully customizable visuals and a custom‑tuned driving assist system.
+          Experience the HUD of The Crew Motorfest inside GTA V. This mod brings a modern, high-precision speedometer with fully customizable visuals and a custom-tuned driving assist system.
         </p>
 
         <div class="caution-box">
           <strong>⚠️ This mod has been temporarily pulled.</strong><br>
-          Discovered a crash that occurs when changing opacity settings. A proper, stable fix is being prepared. The mod will be re‑released as soon as it’s ready. Thank you for your patience!
+          Discovered a crash that occurs when changing opacity settings. A proper, stable fix is being prepared. The mod will be re-released as soon as it's ready. Thank you for your patience!
         </div>
 
         <div class="featured-features">
@@ -1376,12 +1584,46 @@ footer {
           <span class="feature-chip">Customizable Layouts</span>
         </div>
 
-        <span class="btn btn-ghost" style="opacity:0.6;cursor:default;pointer-events:none;">Currently Unavailable</span>
+        <div class="featured-actions">
+          <span class="btn btn-ghost" style="opacity:0.6;cursor:default;pointer-events:none;">Currently Unavailable</span>
+          <button type="button" class="btn btn-primary" onclick="openProgressModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 3v18h18M7 15l4-6 4 3 5-8"/></svg>
+            Development Progress
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </section>
-  
+
+<div class="modal-overlay" id="progressModalOverlay" onclick="if(event.target===this) closeProgressModal()">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-close" onclick="closeProgressModal()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </div>
+
+    <p class="modal-eyebrow">Development Status</p>
+    <h3 class="modal-title" id="modalTitle">Motorfest Speedometer</h3>
+    <p class="modal-subtitle" id="modalVersionLabel">Target Release: v1.1</p>
+
+    <div class="progress-track-wrap">
+      <div class="progress-track-header">
+        <span class="progress-track-label">Overall Progress</span>
+        <span class="progress-track-percent" id="progressPercentLabel">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-track-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="milestone-list" id="milestoneList"></div>
+
+    <div class="modal-note" id="modalNote"></div>
+
+    <p class="modal-updated" id="modalUpdated"></p>
+  </div>
+</div>
+
 <section id="mods">
   <div class="container">
     <p class="section-label reveal">Releases</p>
@@ -1470,18 +1712,26 @@ footer {
   </div>
 </section>
 
+<section id="upcoming">
+  <div class="container">
+    <p class="section-label reveal">Ideas</p>
+    <h2 class="section-title reveal">Upcoming</h2>
+    <p class="section-desc reveal" style="transition-delay:0.1s;">Concepts and projects being considered for the future. Nothing here is guaranteed to ship.</p>
+
+    <div class="upcoming-grid">
+
       <div class="upcoming-card upcoming-card-placeholder reveal" style="transition-delay:0.2s;">
         <div class="upcoming-image">
           <div class="upcoming-image-placeholder">
-            <span> </span>
+            <span>Concept</span>
           </div>
         </div>
         <div class="upcoming-body">
           <span class="badge badge-upcoming">Planning</span>
           <p class="upcoming-title">Forza Skill Chain</p>
-          <p class="upcoming-desc">Inspired by Forza Horizon 5's Skill Chain system, a continuous scoring streak where players accumulate points by performing driving stunts 
+          <p class="upcoming-desc">Inspired by Forza Horizon 5's Skill Chain system, a continuous scoring streak where players accumulate points by performing driving stunts
              such as drifting, jumping, and smashing destructible objects.</p>
-           <p class="upcoming-disclaimer">This mod is still in the early planning stage and represents only a concept at this time. As plans may change during development, 
+           <p class="upcoming-disclaimer">This mod is still in the early planning stage and represents only a concept at this time. As plans may change during development,
               there is a chance that the mod may not ultimately be released.</p>
         </div>
       </div>
@@ -1638,19 +1888,19 @@ footer {
           Some projects featured on this website are inspired by user interface designs, dashboard layouts, and visual styles found in other video games.
         </p>
         <p>
-          All mods published by RexMods are fan‑made projects created for the GTA V modding community. Unless explicitly stated otherwise, the assets included in these projects are created from scratch and are not extracted, copied, or redistributed from any commercial game.
+          All mods published by RexMods are fan-made projects created for the GTA V modding community. Unless explicitly stated otherwise, the assets included in these projects are created from scratch and are not extracted, copied, or redistributed from any commercial game.
         </p>
         <p>
           Textures, interface elements, dashboard graphics, and other visual assets are designed by RexMods using publicly available reference material such as gameplay footage, screenshots, promotional media, and personal artwork. These references are used solely to study visual style, layout, proportions, and design language while creating original assets suitable for use within GTA V.
         </p>
         <p>
-          For example, the Forza Styled Speedometer and other similar projects are inspired by the visual presentation of racing game dashboards. However, the assets included in the mods are custom‑made recreations and are not taken from the original games. While certain layouts, styling choices, and design concepts may appear familiar, the textures, graphics, and implementation are created independently for use within GTA V.
+          For example, the Forza Styled Speedometer and other similar projects are inspired by the visual presentation of racing game dashboards. However, the assets included in the mods are custom-made recreations and are not taken from the original games. While certain layouts, styling choices, and design concepts may appear familiar, the textures, graphics, and implementation are created independently for use within GTA V.
         </p>
         <p>
           Any fonts used within these projects are either licensed for public use, distributed under open font licenses, or used in accordance with their respective licensing terms. In cases where text is incorporated into textures or image files, the underlying font remains subject to its original license.
         </p>
         <p>
-          All trademarks, game titles, logos, and brand names mentioned on this website remain the property of their respective owners. References to third‑party games are used solely for identification, comparison, compatibility, or descriptive purposes.
+          All trademarks, game titles, logos, and brand names mentioned on this website remain the property of their respective owners. References to third-party games are used solely for identification, comparison, compatibility, or descriptive purposes.
         </p>
         <p>
           These projects are unofficial fan creations and are not affiliated with, endorsed by, sponsored by, or approved by any game developer, publisher, or rights holder.
@@ -1704,7 +1954,7 @@ footer {
     </div>
 
     <div class="footer-copy">
-      <span>© 2026 RexMods · </span>
+      <span>© 2026 RexMods</span>
       <span>All mods are free. Always download from official platforms.</span>
     </div>
   </div>
@@ -1746,32 +1996,106 @@ window.addEventListener('scroll', () => {
 
 const HERO_IMAGE_URL      = 'https://i.ibb.co/chfrzj6L/Still-2026-06-20-152428-3-1-1.png';
 const FEATURED_IMAGE_URL  = 'https://i.ibb.co/jkZWKpwj/Banner.png';
-const FEATURED2_IMAGE_URL  = 'https://i.ibb.co/dwW5g3pL/Banner.png';
+const FEATURED2_IMAGE_URL = 'https://i.ibb.co/dwW5g3pL/Banner.png';
 const LOGO_IMAGE_URL      = 'https://i.ibb.co/vCDRW1jV/Logo.png';
-const UPCOMING_1_IMAGE_URL = 'https://i.ibb.co/Swx5d9Nv/Crew-Speedo.png';
 
-if (HERO_IMAGE_URL) {
-  document.getElementById('heroBg').style.backgroundImage = `url('${HERO_IMAGE_URL}')`;
+function setBg(imgId, placeholderId, url) {
+  if (!url) return;
+  const img = document.getElementById(imgId);
+  const placeholder = document.getElementById(placeholderId);
+  if (!img) return;
+  img.style.backgroundImage = `url('${url}')`;
+  if (placeholder) placeholder.style.display = 'none';
 }
-if (FEATURED_IMAGE_URL) {
-  const fi = document.getElementById('featuredImage');
-  fi.style.backgroundImage = `url('${FEATURED_IMAGE_URL}')`;
-  document.getElementById('featuredPlaceholder').style.display = 'none';
-}
-if (FEATURED2_IMAGE_URL) {
-  const fi2 = document.getElementById('featuredImage2');
-  fi2.style.backgroundImage = `url('${FEATURED2_IMAGE_URL}')`;
-  document.getElementById('featuredPlaceholder2').style.display = 'none';
-}
+
+setBg('heroBg', null, HERO_IMAGE_URL);
+setBg('featuredImage', 'featuredPlaceholder', FEATURED_IMAGE_URL);
+setBg('featuredImage2', 'featuredPlaceholder2', FEATURED2_IMAGE_URL);
+
 if (LOGO_IMAGE_URL) {
   const logo = document.getElementById('navLogo');
   logo.innerHTML = `<img src="${LOGO_IMAGE_URL}" alt="RexMods Logo" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
 }
-if (UPCOMING_1_IMAGE_URL) {
-  const up1 = document.getElementById('upcomingImage1');
-  up1.style.backgroundImage = `url('${UPCOMING_1_IMAGE_URL}')`;
-  document.getElementById('upcomingPlaceholder1').style.display = 'none';
+
+/* =====================================================================
+   MOTORFEST SPEEDOMETER — DEVELOPMENT PROGRESS
+   Edit the object below to update the modal. Nothing else needs to change.
+
+   - percent:        overall completion shown on the progress bar (0-100)
+   - targetVersion:  version label shown under the modal title
+   - lastUpdated:    freeform text, e.g. "July 2026"
+   - milestones:     ordered list of { label, status }
+                      status must be one of:
+                        "complete"     -> done
+                        "in-progress"  -> currently being worked on
+                        "planned"      -> scoped but not started
+                        "tba"          -> no timeline yet
+   - note:           supporting text below the milestone list.
+                      HTML is allowed, e.g. <strong>bold</strong>
+   ===================================================================== */
+const MOTORFEST_PROGRESS = {
+  percent: 56,
+  targetVersion: "v1.2",
+  lastUpdated: "July 2026",
+  milestones: [
+    { label: "v1.0 / v1.0.1 Crash Fix",          status: "complete" },
+    { label: "Nitro Function Implementation",    status: "in-progress" },
+    { label: "Nitro Textures &amp; Draw Calls",  status: "planned" },
+    { label: "v1.1 Beta Testing",                status: "tba" },
+    { label: "v1.1 Release",                     status: "tba" }
+  ],
+  note: "Versions 1.0 and 1.0.1 have been deprecated and are no longer distributed. " +
+        "The upcoming <strong>v1.1</strong> release consolidates all identified crash fixes and stability " +
+        "improvements, with continued work toward full performance optimization for smooth, real-time " +
+        "operation comparable to The Crew Motorfest's dashboard experience."
+};
+
+const PROGRESS_STATUS_META = {
+  "complete":    { icon: "✓", text: "Complete" },
+  "in-progress": { icon: "●", text: "In Development" },
+  "planned":     { icon: "○", text: "Planned" },
+  "tba":         { icon: "–", text: "TBA" }
+};
+
+function renderProgressModal() {
+  const data = MOTORFEST_PROGRESS;
+
+  document.getElementById('modalVersionLabel').textContent = `Target Release: ${data.targetVersion}`;
+  document.getElementById('progressPercentLabel').textContent = `${data.percent}%`;
+  document.getElementById('progressFill').style.width = `${data.percent}%`;
+  document.getElementById('modalNote').innerHTML = data.note;
+  document.getElementById('modalUpdated').textContent = `Last updated: ${data.lastUpdated}`;
+
+  const list = document.getElementById('milestoneList');
+  list.innerHTML = '';
+  data.milestones.forEach(m => {
+    const meta = PROGRESS_STATUS_META[m.status] || PROGRESS_STATUS_META.planned;
+    const item = document.createElement('div');
+    item.className = `milestone-item milestone-${m.status}`;
+    item.innerHTML = `
+      <div class="milestone-icon">${meta.icon}</div>
+      <div class="milestone-label">${m.label}</div>
+      <div class="milestone-status-text">${meta.text}</div>
+    `;
+    list.appendChild(item);
+  });
 }
+
+function openProgressModal() {
+  renderProgressModal();
+  const overlay = document.getElementById('progressModalOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProgressModal() {
+  document.getElementById('progressModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeProgressModal();
+});
 </script>
 
 </body>
