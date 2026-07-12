@@ -828,7 +828,9 @@
                 <li><a href="#whats-new">What's New in v1.2</a></li>
                 <li><a href="#requirements">Requirements</a></li>
                 <li><a href="#official-download">Official Download &amp; Support Notice</a></li>
+                <li><a href="#enhanced-compatibility">GTA V Enhanced Compatibility Notice</a></li>
                 <li><a href="#installation">Installation</a></li>
+                <li><a href="#installation-enhanced">Installation (GTA V Enhanced)</a></li>
                 <li><a href="#updating">Updating from v1.1</a></li>
                 <li><a href="#controls">Default Controls</a></li>
                 <li><a href="#driving-aids">Driving Aids</a></li>
@@ -910,10 +912,49 @@
             </ul>
             <div class="warning">
                 <div class="callout-label">Important</div>
-                <strong>If you did not download this mod from one of the sources above, it was not uploaded or authorized by me</strong> even if the site in question credits me as the author.<br><br>
-                Copies found on other websites may be <strong>outdated, modified, incomplete, deprecated or bundled with malware, viruses or other unwanted files</strong>. 
-                I am not responsible for any damage, malware, game issues, crashes or other problems caused by copies obtained from unofficial sources.<br><br>
+                <strong>If you did not download this mod from one of the sources above, it was not uploaded or authorized by me</strong> — even if the site in question credits me as the author.<br><br>
+                Copies found on other websites may be <strong>outdated, modified, incomplete, deprecated, or bundled with malware, viruses, or other unwanted files</strong>. I am not responsible for any damage, malware, game issues, crashes, or other problems caused by copies obtained from unofficial sources.<br><br>
                 Support is provided <strong>only</strong> for copies downloaded from the official locations listed above. I am unable to offer support or troubleshooting for mods obtained elsewhere.
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- GTA V Enhanced Compatibility Notice -->
+        <section id="enhanced-compatibility">
+            <h2>GTA V Enhanced Compatibility Notice</h2>
+            <p>The included texture archive (YTD) has been converted and tested for compatibility with <strong>GTA V Enhanced</strong> and works correctly on my installation, including the game running multiple add-on vehicles, graphics modifications and other mods.</p>
+            <p>However, due to differences in individual game installations and mod combinations, compatibility cannot be guaranteed for every setup.</p>
+
+            <div class="warning">
+                <div class="callout-label">If You Experience Issues</div>
+                If you experience any of the following after installation:
+                <ul>
+                    <li>White or missing textures</li>
+                    <li>Black textures</li>
+                    <li>HUD textures failing to load</li>
+                    <li>Game crashes during startup</li>
+                    <li>Scaleform rendering issues</li>
+                </ul>
+                please try the following before assuming the mod is incompatible:
+                <ol>
+                    <li>Close OpenIV completely.</li>
+                    <li>Restart GTA V.</li>
+                    <li>Repeat this process up to three times, allowing the game to fully rebuild and reload the modified texture archives.</li>
+                </ol>
+                In most cases, this resolves temporary texture streaming issues.
+            </div>
+
+            <p>If the issue still persists after multiple restarts:</p>
+            <ul>
+                <li>Remove the modified texture archive from <code>scaleform_generic.rpf</code>.</li>
+                <li>Remove <code>FSS.dll</code> and <code>FSS.ini</code> from the <code>scripts</code> folder.</li>
+            </ul>
+            <p>In this case use it on legacy version.</p>
+
+            <div class="note">
+                <div class="callout-label">Note</div>
+                This behaviour is related to <strong>GTA V Enhanced's texture loading and streaming system</strong> rather than the Speedometer itself.
             </div>
         </section>
 
@@ -921,17 +962,45 @@
 
         <!-- Installation -->
         <section id="installation">
-            <h2>Installation</h2>
+            <h2>Installation (GTA V Legacy)</h2>
             <ol>
                 <li>Install the required tools: <strong>Script Hook V</strong>, <strong>Script Hook V .NET</strong>, and <strong>LemonUI</strong>.
                     <br>Go inside the <code>SHVDN3</code> folder and place <code>LemonUI.SHVDN3.dll</code> in your <code>scripts</code> folder.
                 </li>
-                <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> into your GTA V <code>scripts</code> folder.</li>
-                <li>Use <strong>OpenIV</strong> to place <code>ForzaSpeedometerFH5.ytd</code> inside:
+                <li>Copy the <code>FSS.dll</code> and <code>FSS.ini</code> files from the <strong>Forza</strong> script folder into your GTA V <code>scripts</code> folder.</li>
+                <li>Go inside the <strong>Legacy</strong> folder and add <code>ForzaSpeedometerFH5.ytd</code> to:
                     <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
                 </li>
                 <li>Launch the game and press <code>F11</code>.</li>
             </ol>
+        </section>
+
+        <hr>
+
+        <!-- Installation (GTA V Enhanced) -->
+        <section id="installation-enhanced">
+            <h2>Installation (GTA V Enhanced)</h2>
+            <p>The installation procedure is the same as the Legacy version above, with a couple of Enhanced-specific additions.</p>
+            <ol>
+                <li>Install the required tools: <strong>Script Hook V</strong>, <strong>Script Hook V .NET</strong>, and <strong>LemonUI</strong>.
+                    <br>Go inside the <code>SHVDN3</code> folder and place <code>LemonUI.SHVDN3.dll</code> in your <code>scripts</code> folder.
+                </li>
+                <li>Copy the <code>FSS.dll</code> and <code>FSS.ini</code> files from the <strong>Forza</strong> script folder into your GTA V <code>scripts</code> folder.</li>
+                <li>Go inside the <strong>Enhanced</strong> folder and add <code>ForzaSpeedometerFH5.ytd</code> to the same path used for Legacy:
+                    <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
+                </li>
+                <li>Install <strong>RageOpenV</strong> and <strong>DirectStorageFix</strong> into your GTA V Enhanced root folder.</li>
+                <li>Launch the game and press <code>F11</code>.</li>
+            </ol>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li><strong>Script Hook V</strong> — <a href="https://www.dev-c.com/gtav/scripthookv/" target="_blank" rel="noopener">https://www.dev-c.com/gtav/scripthookv/</a></li>
+                <li><strong>Script Hook V .NET</strong> — <a href="https://www.gta5-mods.com/tools/script-hook-v-net-enhanced" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/script-hook-v-net-enhanced</a></li>
+                <li><strong>LemonUI</strong> — <a href="https://www.gta5-mods.com/tools/lemonui" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/lemonui</a></li>
+                <li><strong>DirectStorageFix</strong> — <a href="https://www.gta5-mods.com/scripts/directstoragefix" target="_blank" rel="noopener">https://www.gta5-mods.com/scripts/directstoragefix</a></li>
+                <li><strong>RageOpenV</strong> — <a href="https://www.gta5-mods.com/tools/rageopenv" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/rageopenv</a></li>
+            </ul>
         </section>
 
         <hr>
@@ -1314,9 +1383,11 @@
                 <table>
                     <tbody>
                         <tr><td><strong>Developer</strong></td><td>Rex Mods</td></tr>
+                        <tr><td><strong>Script Hook V</strong></td><td>Alexander Blade</td></tr>
                         <tr><td><strong>SHVDNE</strong></td><td>Chiheb-Bacha</td></tr>
                         <tr><td><strong>Lemon UI</strong></td><td>justalemon</td></tr>
-                        <tr><td><strong>Script Hook V</strong></td><td>Alexander Blade</td></tr>
+                        <tr><td><strong>DirectStorageFix</strong></td><td>alloc8or</td></tr>
+                        <tr><td><strong>RageOpenV</strong></td><td>Chiheb-Bacha</td></tr>
                         <tr><td><strong>Secuela Font</strong></td><td>Fernando Haro</td></tr>
                     </tbody>
                 </table>
