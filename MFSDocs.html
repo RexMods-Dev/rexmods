@@ -1,457 +1,787 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motorfest Speedometer — Documentation</title>
-<style>
-  :root{
-    --bg:#121014;
-    --panel:#17151a;
-    --text:#d9d4dc;
-    --text-dim:#938c9a;
-    --line:#2b2731;
-
-    --peach:#E0A286;
-    --cream:#F5D8CB;
-    --mauve:#8B618D;
-    --lilac:#AC80B2;
-    --violet:#8671AE;
-    --warn-bg:#2a1f1c;
-    --warn-border:#b55a48;
-    --warn-text:#f5c6b0;
-  }
-
-  *{ box-sizing:border-box; }
-
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Georgia, "Times New Roman", serif;
-    font-size:16px;
-    line-height:1.7;
-    padding:60px 20px 100px;
-  }
-
-  .doc{
-    max-width:740px;
-    margin:0 auto;
-  }
-
-  /* Title block */
-  .doc-title{
-    text-align:center;
-    margin-bottom:50px;
-  }
-  .doc-title h1{
-    font-family:Georgia, serif;
-    font-size:2rem;
-    margin:0 0 8px;
-    color:var(--cream);
-    font-weight:normal;
-    letter-spacing:.02em;
-  }
-  .doc-title .by{
-    color:var(--text-dim);
-    font-size:.95rem;
-  }
-  .doc-title .ver{
-    margin-top:14px;
-    display:inline-block;
-    font-size:.8rem;
-    color:var(--peach);
-    border:1px solid var(--line);
-    padding:3px 12px;
-    border-radius:3px;
-    font-family:"Courier New", monospace;
-  }
-
-  /* Warning note */
-  .warning-note{
-    background:var(--warn-bg);
-    border:1px solid var(--warn-border);
-    border-left:4px solid var(--warn-border);
-    padding:18px 24px;
-    margin-bottom:40px;
-    border-radius:4px;
-    font-size:0.95rem;
-    line-height:1.6;
-  }
-  .warning-note strong{
-    color:var(--warn-text);
-    display:block;
-    font-size:1.05rem;
-    margin-bottom:8px;
-  }
-  .warning-note p{
-    margin:0;
-    color:var(--warn-text);
-  }
-
-  hr{
-    border:none;
-    border-top:1px solid var(--line);
-    margin:48px 0;
-  }
-
-  h2{
-    font-family:Georgia, serif;
-    font-size:1.3rem;
-    font-weight:normal;
-    color:var(--cream);
-    border-left:3px solid var(--lilac);
-    padding-left:14px;
-    margin:0 0 20px;
-  }
-
-  h3{
-    font-family:Georgia, serif;
-    font-size:1.05rem;
-    font-weight:normal;
-    color:var(--peach);
-    margin:28px 0 10px;
-  }
-
-  p{ margin:0 0 16px; color:var(--text); }
-
-  a{ color:var(--lilac); text-decoration:underline; }
-  a:hover{ color:var(--peach); }
-
-  ul, ol{ margin:0 0 16px; padding-left:26px; }
-  li{ margin-bottom:6px; }
-
-  strong, b{ color:var(--cream); font-weight:bold; }
-
-  code{
-    font-family:"Courier New", monospace;
-    background:var(--panel);
-    border:1px solid var(--line);
-    padding:1px 6px;
-    border-radius:3px;
-    color:var(--peach);
-    font-size:.92em;
-  }
-
-  pre{
-    font-family:"Courier New", monospace;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-left:3px solid var(--violet);
-    padding:14px 18px;
-    border-radius:3px;
-    overflow-x:auto;
-    font-size:.88rem;
-    line-height:1.6;
-    color:var(--text);
-    margin:0 0 18px;
-  }
-
-  table{
-    width:100%;
-    border-collapse:collapse;
-    margin:0 0 20px;
-    font-size:.94rem;
-  }
-  th, td{
-    border:1px solid var(--line);
-    padding:9px 14px;
-    text-align:left;
-  }
-  th{
-    background:var(--panel);
-    color:var(--cream);
-    font-weight:normal;
-    font-family:"Courier New", monospace;
-    font-size:.82rem;
-    letter-spacing:.03em;
-    text-transform:uppercase;
-  }
-  td{ color:var(--text); }
-
-  blockquote{
-    margin:0 0 18px;
-    padding:10px 16px;
-    border-left:3px solid var(--peach);
-    background:var(--panel);
-    color:var(--text-dim);
-    font-style:italic;
-  }
-
-  .toc{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:18px 24px;
-    margin-bottom:50px;
-  }
-  .toc-title{
-    font-family:"Courier New", monospace;
-    font-size:.78rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    margin-bottom:10px;
-  }
-  .toc ul{ margin:0; padding-left:18px; columns:2; }
-  .toc li{ margin-bottom:5px; font-size:.92rem; }
-  .toc a{ text-decoration:none; }
-  .toc a:hover{ text-decoration:underline; }
-
-  .footer{
-    margin-top:60px;
-    padding-top:24px;
-    border-top:1px solid var(--line);
-    color:var(--text-dim);
-    font-size:.82rem;
-    font-family:"Courier New", monospace;
-    text-align:center;
-  }
-
-  section{ scroll-margin-top:20px; }
-
-  @media (max-width:600px){
-    body{ padding:36px 16px 70px; font-size:15px; }
-    .toc ul{ columns:1; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motorfest Speedometer | RexMods Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap');
+        :root {
+            /* Primary Colors */
+            --c-deep-black: #050505;
+            --c-rich-charcoal: #121212;
+            --c-graphite: #1A1A1A;
+            --c-gunmetal: #22252A;
+            /* Accent Colors */
+            --c-electric-blue: #00F0FF;
+            --c-racing-orange: #FF5A1F;
+            --c-cyan: #00D9FF;
+            --c-soft-silver: #C0C4CC;
+            --c-warm-white: #F5F5F7;
+            /* Text Colors */
+            --text-primary: var(--c-warm-white);
+            --text-secondary: var(--c-soft-silver);
+            --text-muted: #848A96;
+            /* Typography */
+            --font-display: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Courier New', monospace;
+            /* Transitions */
+            --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            font-size: 16px;
+        }
+        body {
+            background-color: var(--c-deep-black);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            counter-reset: section-counter;
+        }
+        /* ── Progress Bar ── */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--c-cyan), var(--c-electric-blue));
+            z-index: 1000;
+            transition: width 0.15s ease-out;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+        }
+        /* ── Navbar ── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 16px 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+        }
+        .nav-brand-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+        .nav-links a {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-normal);
+        }
+        .nav-links a:hover {
+            color: var(--c-cyan);
+        }
+        /* ── Layout ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 4vw 80px;
+        }
+        /* ── Hero / Title Block ── */
+        .doc-title {
+            text-align: center;
+            margin-bottom: 48px;
+            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .doc-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--c-cyan);
+            margin-bottom: 16px;
+        }
+        .doc-title h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .doc-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--c-gunmetal);
+            background-color: var(--c-rich-charcoal);
+            color: var(--text-secondary);
+        }
+        .meta-tag.active {
+            border-color: var(--c-cyan);
+            color: var(--c-cyan);
+        }
+        /* ── Alert Blocks ── */
+        .alert-critical {
+            padding: 32px;
+            margin-bottom: 64px;
+            background-color: rgba(0, 217, 255, 0.08);
+            border: 1px solid var(--c-cyan);
+            border-left: 4px solid var(--c-cyan);
+            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .alert-critical strong {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--c-cyan);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .alert-critical p {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        /* ── TOC ── */
+        .toc {
+            background-color: var(--c-rich-charcoal);
+            border: 1px solid var(--c-gunmetal);
+            padding: 32px;
+            margin-bottom: 64px;
+            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .toc-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .toc-title::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: currentColor;
+        }
+        .toc ul {
+            columns: 2;
+            column-gap: 48px;
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            break-inside: avoid;
+            color: var(--text-muted);
+        }
+        .toc a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .toc a:hover {
+            color: var(--text-primary);
+        }
+        .toc a.active {
+            color: var(--c-cyan);
+            font-weight: 500;
+        }
+        /* ── Sections & Typography ── */
+        section {
+            counter-increment: section-counter;
+            scroll-margin-top: 100px;
+            margin-bottom: 64px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid var(--c-gunmetal);
+            margin: 64px 0;
+        }
+        h2 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--c-gunmetal);
+            position: relative;
+        }
+        h2::before {
+            content: counter(section-counter, decimal-leading-zero) " //";
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--c-cyan);
+            margin-right: 12px;
+            font-weight: normal;
+        }
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin: 40px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        p, ul, ol {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        ul, ol {
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: var(--c-cyan);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            border-bottom: 1px solid transparent;
+        }
+        a:hover {
+            color: var(--c-electric-blue);
+            border-bottom-color: var(--c-electric-blue);
+        }
+        strong, b {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        em {
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        s {
+            color: var(--text-muted);
+        }
+        /* ── Code & Pre ── */
+        code {
+            font-family: var(--font-mono);
+            background-color: var(--c-graphite);
+            border: 1px solid var(--c-gunmetal);
+            padding: 2px 6px;
+            font-size: 0.9em;
+            color: var(--c-cyan);
+        }
+        pre {
+            background-color: var(--c-rich-charcoal);
+            border: 1px solid var(--c-gunmetal);
+            border-left: 2px solid var(--c-cyan);
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 24px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--c-graphite);
+            border: 1px solid var(--c-gunmetal);
+            padding: 4px 12px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .copy-btn:hover {
+            color: var(--c-deep-black);
+            background-color: var(--text-primary);
+        }
+        /* ── Callouts ── */
+        .note, .warning {
+            padding: 24px;
+            margin: 32px 0;
+            background-color: var(--c-rich-charcoal);
+            position: relative;
+        }
+        .note {
+            border-left: 2px solid var(--c-cyan);
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.05) 0%, transparent 100%);
+        }
+        .warning {
+            border-left: 2px solid var(--c-racing-orange);
+            background: linear-gradient(90deg, rgba(255, 90, 31, 0.05) 0%, transparent 100%);
+        }
+        .callout-label {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .note .callout-label {
+            color: var(--c-cyan);
+        }
+        .warning .callout-label {
+            color: var(--c-racing-orange);
+        }
+        blockquote {
+            margin: 32px 0;
+            padding: 24px;
+            border-left: 2px solid var(--c-cyan);
+            background: var(--c-rich-charcoal);
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        /* ── Tables ── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 32px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            border-bottom: 1px solid var(--c-gunmetal);
+            padding: 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background-color: var(--c-graphite);
+        }
+        td {
+            color: var(--text-secondary);
+        }
+        td:first-child {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        tbody tr {
+            transition: background-color var(--transition-fast);
+        }
+        tbody tr:hover {
+            background-color: var(--c-rich-charcoal);
+        }
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            background-color: var(--c-rich-charcoal);
+            border: 1px solid var(--c-gunmetal);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all var(--transition-normal);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            border-color: var(--c-cyan);
+            color: var(--c-cyan);
+        }
+        /* Animations */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+            .container {
+                padding-top: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="doc">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-name">RexMods</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Back to Archive</a>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Title block -->
+        <div class="doc-title">
+            <div class="doc-label">Technical Documentation</div>
+            <h1>Motorfest Speedometer</h1>
+            <div class="doc-meta">
+                <span class="meta-tag">By RexMods</span>
+                <span class="meta-tag active">Version 1.1.0-beta</span>
+                <span class="meta-tag" id="readTime">4 min read</span>
+            </div>
+        </div>
+        <!-- ⚠️ IMPORTANT WARNING NOTE -->
+        <div class="alert-critical">
+            <strong>⚠️ Beta Release Notice</strong>
+            <p>Welcome to version <strong>1.1.0-beta</strong>I am happy to announce that the mod is now stable and completely crash free based on my testing. To ensure stability and visual correctness,
+                some settings related to opacity from the old version have been reduced. As this is a beta version, you may encounter minor visual glitches,
+                but these will not affect functionality or cause your game to crash.</p>
+        </div>
+        <!-- Table of contents -->
+        <div class="toc">
+            <div class="toc-title">Contents Index</div>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#changelog">Changelog</a></li>
+                <li><a href="#features">Core Features</a></li>
+                <li><a href="#assists">Advanced Driving Assists</a></li>
+                <li><a href="#controls">Default Controls</a></li>
+                <li><a href="#official-download">Official Download &amp; Support</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#troubleshooting">Troubleshooting &amp; Logging</a></li>
+                <li><a href="#credits">Credits</a></li>
+                <li><a href="#support">Support &amp; Usage</a></li>
+            </ul>
+        </div>
+        <!-- Overview -->
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The Motorfest Speedometer brings a highly dynamic, fully customizable, and visually striking HUD to Grand Theft Auto V, inspired by The Crew Motorfest.</p>
+            <p>This mod goes beyond visuals. It features a completely custom built vehicle dynamics system, providing real-time Driving Assists (ABS, ESP and TCS). Whether you are using a keyboard or a controller, the robust input system ensures seamless control over your vehicle and your settings. Everything from the gauge size to the needle sweep arc can be customised in-game via a clean, intuitive menu.</p>
+        </section>
+        <!-- Changelog -->
+        <section id="changelog">
+            <h2>Changelog</h2>
+            <h3>v1.1.0-beta</h3>
+            <p><strong>Major Updates &amp; Fixes</strong></p>
+            <ul>
+                <li><strong>Crash Fixes:</strong> All previously reported crashes have been completely resolved. The mod is now fully stable and crash-free.</li>
+                <li><strong>Settings Adjustments:</strong> To prevent further issues and ensure optimal stability, some of the opacity options from previous versions have been reduced.</li>
+                <li><strong>Nitro System Introduction:</strong> Added a brand-new visual nitro gauge system that tracks and displays your boost capacity.</li>
+                <li><strong>Nitro Sound Toggle:</strong> A new option to switch between game audio and custom sounds for nitro. <em>Important:</em> Custom sounds are not yet available in this beta. You must select the "game" option for now. Custom sounds will arrive with the stable release.</li>
+            </ul>
+            <p><strong>Tweaks &amp; Bug Fixes (Carried Over)</strong></p>
+            <ul>
+                <li><strong>Reverse Gear ABS Fix</strong> — Fixed an issue where backing up would cause the ABS icon to falsely trigger and blink.</li>
+                <li><strong>Anti glide Engine Fix</strong> — Fixed an issue where pressing <code>W</code> with the engine dead would cause the car to slowly glide forward. The throttle is now strictly locked out until the engine is repaired.</li>
+                <li><strong>ABS System Rebalance</strong> — Improved the gap between ABS modes. "Mild" now feels closer to a subtle vanilla enhancement, while "Sporty" provides highly aggressive, noticeable stopping power.</li>
+            </ul>
+        </section>
+        <!-- Core Features -->
+        <section id="features">
+            <h2>Core Features</h2>
+            <h3>Motorfest-Inspired UI</h3>
+            <p>A sleek, modern gauge featuring smooth RPM sweeps, speed digits, gear indicators and dynamic needle colour changes at redline.</p>
+            <h3>Nitro System (New in Beta)</h3>
+            <p>A fully integrated nitro gauge that visualizes your boost capacity as a dynamic arc that fills up. This is a first working version of the system and may be refined further in future updates.</p>
+            <ul>
+                <li><strong>Dynamic Color Mapping:</strong> The nitro gauge dynamically changes color based on your current charge level:
+                    <ul>
+                        <li><strong>0–24%:</strong> White</li>
+                        <li><strong>25–49%:</strong> Yellow</li>
+                        <li><strong>50–74%:</strong> Purple</li>
+                        <li><strong>75–99%:</strong> Magenta/Red</li>
+                        <li><strong>100% (Full):</strong> Cyan. Features a brief white-to-cyan pulse animation the moment it hits full charge before settling on cyan.</li>
+                    <li><strong>Toggle</strong> U have to press <strong>Shift Key</strong> to use nitro. [Only available if the nitro charge is above 50%.] </li>
+                    </ul>
+                </li>
+                <li><strong>Nitro Audio Toggle:</strong> Choose between standard game audio and custom sounds in the settings. <em>Note: Custom sounds are not included in this beta. Please ensure you select the "game" audio option for now.</em></li>
+            </ul>
+            <h3>Complete Layout Control</h3>
+            <p>Almost every visual element (gauge, needle, sweep arc, halftone, text, icons, and units) can be resized, repositioned, rotated and adjusted directly in-game.</p>
+            <h3>Themes</h3>
+            <p>Choose from 6 built-in gauge background themes:</p>
+            <ul>
+                <li>Default</li>
+                <li>Black Shadow</li>
+                <li>Red Accent</li>
+                <li>Yellow Accent</li>
+                <li>Cyan</li>
+                <li>Custom</li>
+            </ul>
+            <h3>Flawless Input Handling</h3>
+            <p>Advanced hardware detection ensures that keyboard inputs (like W/A/S/D) never cross-talk or interfere with your Gamepad controls.</p>
+            <h3>Immersive HUD Control</h3>
+            <p>Option to automatically hide the vehicle, street name info while the mod is active.</p>
+        </section>
+        <!-- Advanced Driving Assists -->
+        <section id="assists">
+            <h2>Advanced Driving Assists</h2>
+            <p>The mod includes a custom-tuned vehicle intervention system. These assists are not realistic real-life counterparts, they are game level handling tweaks designed to mimic the behaviour of traction, stability and braking aids. They may be refined further in future updates.</p>
+            <p>The assist states act as true switches: once you enable or disable them, they stay exactly as you set them, regardless of your driving.</p>
+            <p>When an assist is Enabled, it monitors the car. When it becomes Active, the corresponding icon on the speedometer will blink to let you know it is stepping in to help you keep control.</p>
+            <p>Both TCS and ABS feature configurable modes (Mild and Sporty) depending on your driving style.</p>
+            <h3>ABS (Assisted Braking System)</h3>
+            <p>Improves braking response and helps you stop smoothly under heavy braking. It does not simulate a true anti-lock system but instead applies a custom brake force adjustment that makes deceleration feel more controlled and responsive, so you can maintain steering while braking.</p>
+            <h3>ESP (Electronic Stability Program)</h3>
+            <p>Works at higher speeds to reduce sliding. If the car begins to drift or spin, ESP subtly cuts engine power and applies drag to pull the vehicle back into a straight line. It is a simplified handling aid.</p>
+            <h3>TCS (Traction Control System)</h3>
+            <p>Detects excessive wheelspin during hard acceleration and smoothly reduces engine power to help you grip the road. It acts as a power limiter to prevent unwanted wheel slip, giving you more consistent launches.</p>
+            <blockquote>Note: These are still not 100% accurate and will depend on the car's handling.</blockquote>
+        </section>
+        <!-- Default Controls -->
+        <section id="controls">
+            <h2>Default Controls</h2>
+            <p>All controls can be fully remapped via the <code>MotorfestSpeedometer.ini</code> file. The mod supports both Keyboard and Controller.</p>
+            <h3>Keyboard</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Key</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>F6</code></td><td>Open the Settings &amp; Layout Menu</td></tr>
+                        <tr><td><code>Z</code></td><td>Start / Stop Engine</td></tr>
+                        <tr><td><code>NumPad 1</code></td><td>Toggle ABS</td></tr>
+                        <tr><td><code>NumPad 2</code></td><td>Toggle ESP</td></tr>
+                        <tr><td><code>NumPad 3</code></td><td>Toggle TCS</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Gamepad</h3> <p>Note: Experimental</p>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Input</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>Interaction Menu Button (Hold/Press)</td><td>Open Menu</td></tr>
+                        <tr><td>D-Pad Down (ScriptRDown)</td><td>Start / Stop Engine</td></tr>
+                        <tr><td>D-Pad Up</td><td>Toggle ABS</td></tr>
+                        <tr><td>D-Pad Right</td><td>Toggle ESP</td></tr>
+                        <tr><td>D-Pad Down</td><td>Toggle TCS</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Menu navigation uses standard UI Accept / Cancel / D-Pad controls.</p>
+        </section>
+        <!-- Official Download & Support Notice -->
+        <section id="official-download">
+            <h2>Official Distribution</h2>
+            <p>This mod is officially distributed <strong>only</strong> through the following verified platforms:</p>
+            <ul>
+                <li><strong>GTA5-Mods</strong></li>
+                <li><strong>Nexus Mods</strong></li>
+                <li><strong>LibertyCity</strong></li>
+                <li><strong>GTAInside</strong></li>
+            </ul>
+            <div class="warning">
+                <div class="callout-label">Security Notice</div>
+                <strong>Only trust the sources listed above</strong><br><br>
+                If this mod was downloaded from any other website, it was not authorized by me, even if that site credits me as the author. Unofficial copies may be outdated, modified, incomplete, deprecated or bundled with malware, viruses, or other unwanted files.<br><br>
+                I am not responsible for any damage, game issues, or crashes they cause. Support is exclusively provided for authenticated copies.
+            </div>
+        </section>
+        <!-- Installation -->
+        <section id="installation">
+            <h2>Installation</h2>
+            <h3>Step 1 — Install Required Tools</h3>
+            <ul>
+                <li>Script Hook V — <a href="https://www.dev-c.com/gtav/scripthookv/" target="_blank" rel="noopener">https://www.dev-c.com/gtav/scripthookv/</a></li>
+                <li>Script Hook V .Net — <a href="https://www.gta5-mods.com/tools/script-hook-v-net-enhanced" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/script-hook-v-net-enhanced</a></li>
+                <li>LemonUI — <a href="https://www.gta5-mods.com/tools/lemonui" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/lemonui</a> (place <code>LemonUI.SHVDN3.dll</code> in your "scripts" folder)</li>
+            </ul>
+            <h3>Step 2 — Copy Mod Files</h3>
+            <p>Place <code>MotorfestSpeedometer.dll</code> and <code>MotorfestSpeedometer.ini</code> into your GTA V "scripts" folder.</p>
+            <h3>Step 3 — Install Texture Pack (OpenIV required)</h3>
+            <p>Open OpenIV and navigate to:</p>
+            <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
+            <p>Drag and drop the provided texture dictionaries (<code>MotorfestGauge.ytd</code> and <code>MotorfestDigits.ytd</code>) into this folder.</p>
+            <p>Launch the game, enter a vehicle, and press <code>F6</code> to open the menu.</p>
+        </section>
+        <!-- Troubleshooting & Logging -->
+        <section id="troubleshooting">
+            <h2>Troubleshooting &amp; Logging</h2>
+            <p>This mod includes a highly detailed, lightweight diagnostic logger.</p>
+            <p>If the mod fails to load, crashes, or an assist behaves unexpectedly, navigate to your scripts folder and open <code>MFLog.txt</code>.</p>
 
-  <div class="doc-title">
-    <h1>Motorfest Speedometer</h1>
-    <div class="by">by RexMods</div>
-    <div class="ver">Version 1.0.1</div>
-  </div>
-
-  <!-- ⚠️ IMPORTANT WARNING NOTE – MOD PULLED PERMANENTLY UNTIL FURTHER NOTICE -->
-  <div class="warning-note">
-    <strong>⚠️ This mod has been temporarily pulled and is no longer available for download.</strong>
-    <p>The mod will remain unpublished until a complete, stable fix is provided. Any previous versions are unsupported and should not be used. We apologize for the inconvenience and appreciate your patience.</p>
-  </div>
-
-  <div class="toc">
-    <div class="toc-title">Contents</div>
-    <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#features">Core Features</a></li>
-      <li><a href="#assists">Advanced Driving Assists</a></li>
-      <li><a href="#controls">Default Controls</a></li>
-      <li><a href="#official-download">Official Download &amp; Support Notice</a></li>
-      <li><a href="#installation">Installation</a></li>
-      <li><a href="#troubleshooting">Troubleshooting &amp; Logging</a></li>
-      <li><a href="#credits">Credits</a></li>
-      <li><a href="#support">Support &amp; Usage Guidelines</a></li>
-    </ul>
-  </div>
-
-  <section id="overview">
-    <h2>Overview</h2>
-    <p>The Motorfest Speedometer brings a highly dynamic, fully customizable, and visually striking HUD to Grand Theft Auto V, inspired by The Crew Motorfest.</p>
-    <p>This mod goes beyond visuals. It features a completely custom built vehicle dynamics system, providing real-time Driving Assists (ABS, ESP and TCS). Whether you are using a keyboard or a controller, the robust input system ensures seamless control over your vehicle and your settings. Everything from the gauge size to the needle sweep arc can be customised in-game via a clean, intuitive menu.</p>
-  </section>
-
-  <hr>
-
-<section id="changelog">
-  <h2>Changelog</h2>
-
-  <h3>v1.0.1</h3>
-  <h3>⚠️ Note: v1.0.1 currently has a temporary fix applied. Opacity settings are disabled until the crash is fully resolved. Everything else works as expected.</h3>
-
-  <p><strong>New Extra Features</strong> (fully toggleable in the new <em>Extra Features</em> menu)</p>
-
-  <ul>
-    <li><strong>Shift Shock (Kinetic Gear Changes)</strong> — Added a mechanical kick simulation. The speed digits briefly scale up and drop on the Y-axis during upshifts to simulate the physical jolt of the transmission.</li>
-    <li><strong>Rev Limiter Needle Bounce</strong> — The RPM needle no longer sits statically at the redline. It now aggressively bounces against the rev limiter, mimicking a real mechanical fuel cut-off.</li>
-    <li><strong>Extreme Speed UI Vibration</strong> — Exceeding 200 km/h introduces a subtle "G-Force Shake" to the speedometer that scales in intensity the faster you go.</li>
-    <li><strong>Smooth Gear Crossfading</strong> — Gear numbers no longer instantly snap. Old gears now smoothly crossfade into the new gear.</li>
-    <li><strong>Engine Misfire Jitter</strong> — If your vehicle takes severe damage (engine starts smoking), the RPM needle will randomly twitch and jitter, providing immersive mechanical feedback that the car is struggling.</li>
-    <li><strong><s>Smart HUD Fading</strong> — The speedometer will now gracefully fade out when parked or idling to declutter your screen. Touching any control or revving instantly snaps it back to 100% opacity. Includes adjustable delay timers and opacity presets.</s></li>
-  </ul>
-
-  <p><strong>Tweaks &amp; Bug Fixes</strong></p>
-
-  <ul>
-    <li><strong>Reverse Gear ABS Fix</strong> — Fixed an issue where backing up would cause the ABS icon to falsely trigger and blink.</li>
-    <li><strong>Anti glide Engine Fix</strong> — Fixed an issue where pressing <code>W</code> with the engine dead would cause the car to slowly glide forward. The throttle is now strictly locked out until the engine is repaired.</li>
-    <li><strong>Ultrawide Monitor Support</strong> — Massively expanded the layout positioning sliders. You can now push the speedometer completely to the edges of ultrawide displays without editing the <code>.ini</code> file.</li>
-    <li><strong>ABS System Rebalance</strong> — Improved the gap between ABS modes. "Mild" now feels closer to a subtle vanilla enhancement, while "Sporty" provides highly aggressive, noticeable stopping power.</li>
-  </ul>
-</section>
-
-  <hr>
-
-  <section id="features">
-    <h2>Core Features</h2>
-
-    <h3>Motorfest-Inspired UI</h3>
-    <p>A sleek, modern gauge featuring smooth RPM sweeps, speed digits, gear indicators and dynamic needle colour changes at redline.</p>
-
-    <h3>Complete Layout Control</h3>
-    <p>Almost every visual element (gauge, needle, sweep arc, halftone, text, icons, and units) can be resized, repositioned, rotated, and adjusted for opacity directly in-game.</p>
-
-    <h3>Themes</h3>
-    <p>Choose from 6 built-in gauge background themes:</p>
-    <ul>
-      <li>Default</li>
-      <li>Black Shadow</li>
-      <li>Red Accent</li>
-      <li>Yellow Accent</li>
-      <li>Cyan</li>
-      <li>Custom</li>
-    </ul>
-
-    <h3>Flawless Input Handling</h3>
-    <p>Advanced hardware detection ensures that keyboard inputs (like W/A/S/D) never cross-talk or interfere with your Gamepad controls.</p>
-
-    <h3>Immersive HUD Control</h3>
-    <p>Option to automatically hide the vehicle, street name info while the mod is active.</p>
-  </section>
-
-  <hr>
-
-  <section id="assists">
-    <h2>Advanced Driving Assists</h2>
-    <p>The mod includes a custom-tuned vehicle intervention system. These assists are not realistic real-life counterparts, they are game level handling tweaks designed to mimic the behaviour of traction, stability and braking aids. They may be refined further in future updates.</p>
-    <p>The assist states act as true switches: once you enable or disable them, they stay exactly as you set them, regardless of your driving.</p>
-    <p>When an assist is Enabled, it monitors the car. When it becomes Active, the corresponding icon on the speedometer will blink to let you know it is stepping in to help you keep control.</p>
-    <p>Both TCS and ABS feature configurable modes (Mild and Sporty) depending on your driving style.</p>
-
-    <h3>ABS (Assisted Braking System)</h3>
-    <p>Improves braking response and helps you stop smoothly under heavy braking. It does not simulate a true anti-lock system but instead applies a custom brake force adjustment that makes deceleration feel more controlled and responsive, so you can maintain steering while braking.</p>
-
-    <h3>ESP (Electronic Stability Program)</h3>
-    <p>Works at higher speeds to reduce sliding. If the car begins to drift or spin, ESP subtly cuts engine power and applies drag to pull the vehicle back into a straight line. It is a simplified handling aid.</p>
-
-    <h3>TCS (Traction Control System)</h3>
-    <p>Detects excessive wheelspin during hard acceleration and smoothly reduces engine power to help you grip the road. It acts as a power limiter to prevent unwanted wheel slip, giving you more consistent launches.</p>
-
-    <blockquote>Note: These are still not 100% accurate and will depend on the cars handling.</blockquote>
-  </section>
-
-  <hr>
-
-  <section id="controls">
-    <h2>Default Controls</h2>
-    <p>All controls can be fully remapped via the <code>MotorfestSpeedometer.ini</code> file. The mod supports both Keyboard and Controller.</p>
-
-    <h3>Default Keyboard Controls</h3>
-    <table>
-      <thead><tr><th>Key</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td><code>F11</code></td><td>Open the Settings &amp; Layout Menu</td></tr>
-        <tr><td><code>Z</code></td><td>Start / Stop Engine</td></tr>
-        <tr><td><code>NumPad 1</code></td><td>Toggle ABS</td></tr>
-        <tr><td><code>NumPad 2</code></td><td>Toggle ESP</td></tr>
-        <tr><td><code>NumPad 3</code></td><td>Toggle TCS</td></tr>
-      </tbody>
-    </table>
-
-    <h3>Controller Controls</h3>
-    <table>
-      <thead><tr><th>Input</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td>Interaction Menu Button (Hold/Press)</td><td>Open Menu</td></tr>
-        <tr><td>D-Pad Down (ScriptRDown)</td><td>Start / Stop Engine</td></tr>
-        <tr><td>D-Pad Up</td><td>Toggle ABS</td></tr>
-        <tr><td>D-Pad Right</td><td>Toggle ESP</td></tr>
-        <tr><td>D-Pad Down</td><td>Toggle TCS</td></tr>
-      </tbody>
-    </table>
-
-    <p>Menu navigation uses standard UI Accept / Cancel / D-Pad controls.</p>
-  </section>
-
-  <hr>
-
-  <section id="official-download">
-    <h2>Official Download &amp; Support Notice</h2>
-    <p>This mod is officially distributed <strong>only</strong> through the following websites:</p>
-    <ul>
-      <li>5Mods</li>
-      <li>Nexus Mods</li>
-      <li>LibertyCity</li>
-      <li>GTAInside</li>
-    </ul>
-    <div class="warning-note">
-      <strong>⚠️ Only trust the sources listed above</strong>
-      <p>If this mod was downloaded from any other website, it was not uploaded or authorized by me, even if that site credits me as the author. 
-        Unofficial copies may be outdated, modified, incomplete, deprecated or bundled with malware, viruses, or other unwanted files 
-        and I am not responsible for any damage, malware, game issues, crashes or other problems they cause. Support is provided only for copies downloaded from the official sources listed above.
-        I am unable to help with mods obtained elsewhere.</p>
+            <p><strong>Beta Notice:</strong> While the mod is stable and crash-free, you may still experience minor visual glitches due to its beta status. If you spot any, please report them along with your log file!</p>
+            <p>This file strictly records:</p>
+            <ul>
+                <li>Script initialisation</li>
+                <li>Configuration loading</li>
+                <li>Explicit input commands</li>
+                <li>Any critical errors</li>
+            </ul>
+            <p>If you need to report a bug, please include the contents of this log file to help pinpoint the issue immediately.</p>
+        </section>
+        <!-- Credits -->
+        <section id="credits">
+            <h2>Credits</h2>
+            <div class="table-wrap">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Developer</strong></td><td>Rex Mods</td></tr>
+                        <tr><td><strong>LemonUI framework</strong></td><td>justalemon</td></tr>
+                        <tr><td><strong>Script Hook V .Net</strong></td><td>Chiheb-Bacha</td></tr>
+                        <tr><td><strong>Script Hook V</strong></td><td>Alexander Blade</td></tr>
+                        <tr><td><strong>Community resources</strong></td><td>JulioNIB</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- Support & Usage Guidelines -->
+        <section id="support">
+            <h2>Support &amp; Usage</h2>
+            <div class="note" style="margin-top: 24px; border-left-color: var(--text-muted);">
+                <div class="callout-label" style="color: var(--text-primary);">Licensing & Usage Policy</div>
+                <p>If you encounter any bugs, please report them in my discord with details from your <code>MFLog.txt</code>.</p>
+                <p>Please respect the time and effort put into this project by not reuploading this mod to other websites or including it in public mod packs without asking first.</p>
+                <p>You are completely free to use this mod, but please do not distribute altered versions or claim the work as your own. If you want to share this mod with others, please link them directly to the original download page.</p>
+            </div>
+        </section>
     </div>
-  </section>
-
-  <hr>
-
-  <section id="installation">
-    <h2>Installation</h2>
-
-    <h3>Step 1 — Install required tools</h3>
-    <ul>
-      <li>Script Hook V — <a href="https://www.dev-c.com/gtav/scripthookv/" target="_blank" rel="noopener">https://www.dev-c.com/gtav/scripthookv/</a></li>
-      <li>Script Hook V .Net — <a href="https://www.gta5-mods.com/tools/script-hook-v-net-enhanced" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/script-hook-v-net-enhanced</a></li>
-      <li>LemonUI — <a href="https://www.gta5-mods.com/tools/lemonui" target="_blank" rel="noopener">https://www.gta5-mods.com/tools/lemonui</a> (place <code>LemonUI.SHVDN3.dll</code> in your "scripts" folder)</li>
-    </ul>
-
-    <h3>Step 2 — Copy the mod files</h3>
-    <p>Place <code>MotorfestSpeedometer.dll</code> and <code>MotorfestSpeedometer.ini</code> into your GTA V "scripts" folder.</p>
-
-    <h3>Step 3 — Install the texture pack (OpenIV required)</h3>
-    <p>Open OpenIV and navigate to:</p>
-    <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
-    <p>Drag and drop the provided texture dictionaries (<code>MotorfestGauge.ytd</code> and <code>MotorfestDigits.ytd</code>) into this folder.</p>
-    <p>Launch the game, enter a vehicle, and press <code>F11</code> to open the menu.</p>
-  </section>
-
-  <hr>
-
-  <section id="troubleshooting">
-    <h2>Troubleshooting &amp; Logging</h2>
-    <p>This mod includes a highly detailed, lightweight diagnostic logger.</p>
-    <p>If the mod fails to load, crashes, or an assist behaves unexpectedly, navigate to your scripts folder and open <code>MFLog.txt</code>.</p>
-    <p>This file strictly records:</p>
-    <ul>
-      <li>Script initialisation</li>
-      <li>Configuration loading</li>
-      <li>Explicit input commands</li>
-      <li>Any critical errors</li>
-    </ul>
-    <p>If you need to report a bug, please include the contents of this log file to help pinpoint the issue immediately.</p>
-  </section>
-
-  <hr>
-
-  <section id="credits">
-    <h2>Credits</h2>
-    <table>
-      <tbody>
-        <tr><td>Developer</td><td>Rex Mods</td></tr>
-        <tr><td>LemonUI framework</td><td>justalemon</td></tr>
-        <tr><td>Script Hook V .Net</td><td>Chiheb-Bacha</td></tr>
-        <tr><td>Script Hook V</td><td>Alexander Blade</td></tr>
-        <tr><td>Community resources and help</td><td>JulioNIB</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <hr>
-
-  <section id="support">
-    <h2>Support &amp; Usage Guidelines</h2>
-    <ul>
-      <li>If you encounter any bugs, please report them in my discord with details from your <code>MFLog.txt</code>.</li>
-      <li>Please respect the time and effort put into this project by not reuploading this mod to other websites or including it in public mod packs without asking first.</li>
-      <li>You are completely free to use this mod, but please do not distribute altered versions or claim the work as your own. If you want to share this mod with others, please link them directly to the original download page.</li>
-    </ul>
-  </section>
-
-  <div class="footer">
-    Motorfest Speedometer — Version 1.0.1 — RexMods
-  </div>
-
-</div>
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ── Reading progress bar ──
+            const progressBar = document.getElementById('progressBar');
+            const backToTop = document.getElementById('backToTop');
+            function onScroll() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+                if (progressBar) progressBar.style.width = progress + '%';
+                if (backToTop) {
+                    if (scrollTop > 400) backToTop.classList.add('visible');
+                    else backToTop.classList.remove('visible');
+                }
+                updateActiveTOC();
+            }
+            // ── TOC scrollspy ──
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            function updateActiveTOC() {
+                let currentId = '';
+                const scrollPos = window.scrollY + 150;
+                sections.forEach(sec => {
+                    if (sec.offsetTop <= scrollPos) {
+                        currentId = sec.id;
+                    }
+                });
+                tocLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+                });
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+            // ── Back to top ──
+            if (backToTop) {
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            // ── Smooth scroll for anchor links ──
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.pushState(null, null, targetId);
+                    }
+                });
+            });
+            // ── Estimated read time ──
+            const readTimeEl = document.getElementById('readTime');
+            if (readTimeEl) {
+                const text = document.querySelector('.container').innerText || '';
+                const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+                const minutes = Math.max(1, Math.round(wordCount / 200));
+                readTimeEl.textContent = minutes + ' MIN READ';
+            }
+            // ── Copy buttons on pre ──
+            document.querySelectorAll('pre').forEach(pre => {
+                const btn = document.createElement('button');
+                btn.className = 'copy-btn';
+                btn.type = 'button';
+                btn.textContent = 'Copy';
+                btn.addEventListener('click', () => {
+                    const content = pre.innerText.replace(/\s*Copy\s*$/, '');
+                    navigator.clipboard.writeText(content).then(() => {
+                        btn.textContent = 'Copied';
+                        setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+                    });
+                });
+                pre.appendChild(btn);
+            });
+        });
+    </script>
 </body>
 </html>
