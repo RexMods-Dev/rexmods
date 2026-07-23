@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RexMods | Premium GTA V Modifications</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+  /* Primary Colors */
+  --c-deep-black: #050505;
+  --c-rich-charcoal: #121212;
+  --c-graphite: #1A1A1A;
+  --c-gunmetal: #22252A;
+
+  /* Accent Colors */
+  --c-electric-blue: #00F0FF;
+  --c-racing-orange: #FF5A1F;
+  --c-cyan: #00D9FF;
+  --c-soft-silver: #C0C4CC;
+  --c-warm-white: #F5F5F7;
+
+  /* Text Colors */
+  --text-primary: var(--c-warm-white);
+  --text-secondary: var(--c-soft-silver);
+  --text-muted: #848A96;
+
+  /* Typography */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --space-2xl: 128px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--c-deep-black);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4vw;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, var(--c-electric-blue), var(--c-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FF7B47, var(--c-racing-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroFadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 32px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  transition: transform var(--transition-normal);
+  transform-origin: left;
+}
+
+.btn-primary {
+  color: var(--c-deep-black);
+  background-color: var(--c-cyan);
+  border: 1px solid var(--c-cyan);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+.btn-primary::before {
+  background-color: var(--c-warm-white);
+  transform: scaleX(0);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+  color: var(--c-deep-black);
+}
+
+.btn-primary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-secondary {
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--c-gunmetal);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary::before {
+  background-color: var(--c-gunmetal);
+  transform: scaleX(0);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-secondary);
+}
+
+.btn-secondary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-third {
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid var(--c-gunmetal);
+  backdrop-filter: blur(10px);
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+.btn-third::before {
+  background-color: var(--c-gunmetal);
+  transform: scaleX(0);
+}
+
+.btn-third:hover {
+  border-color: var(--text-secondary);
+}
+
+.btn-third:hover::before {
+  transform: scaleX(1);
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: all var(--transition-normal);
+}
+
+.navbar.scrolled {
+  padding: 16px 4vw;
+  background-color: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--c-rich-charcoal);
+  border: 1px solid var(--c-gunmetal);
+}
+
+.nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 8px 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--c-electric-blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-normal);
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-links .discord-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: rgba(26, 26, 26, 0.8);
+  border: 1px solid var(--c-gunmetal);
+  border-radius: 4px;
+}
+
+.nav-links .discord-btn::after {
+  display: none;
+}
+
+.nav-links .discord-btn:hover {
+  background-color: var(--c-gunmetal);
+  border-color: var(--text-secondary);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: all var(--transition-normal);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 120%;
+  background-image: url('https://i.ibb.co/chfrzj6L/Still-2026-06-20-152428-3-1-1.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.95) 100%),
+              linear-gradient(to bottom, rgba(5,5,5,0.2) 0%, var(--c-deep-black) 100%);
+}
+
+.hero-content {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-cyan);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-label::before {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background-color: var(--c-cyan);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  color: var(--c-warm-white);
+  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.hero-desc {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.6;
+  transition: opacity var(--transition-normal);
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-indicator span {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--text-primary) 50%, transparent 50%);
+  background-size: 100% 200%;
+  animation: scroll-line 2s infinite linear;
+}
+
+@keyframes scroll-line {
+  0% { background-position: 100% 100%; }
+  100% { background-position: 100% -100%; }
+}
+
+/* Sections General */
+.section {
+  padding: var(--space-2xl) 0;
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: var(--space-xl);
+  max-width: 700px;
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label.color-cyan { color: var(--c-cyan); }
+.section-label.color-orange { color: var(--c-racing-orange); }
+
+.section-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* Badges & Chips */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  background-color: rgba(255,255,255,0.02);
+  backdrop-filter: blur(4px);
+}
+
+.badge-active { color: var(--c-cyan); }
+.badge-pulled { color: var(--c-racing-orange); }
+.badge-upcoming { color: var(--text-secondary); }
+
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.badge-active::before { animation: pulse 2s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.chip {
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--c-rich-charcoal);
+  border: 1px solid var(--c-gunmetal);
+  border-radius: 2px;
+}
+
+/* Featured Projects Showcase */
+.showcase-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.showcase-item:nth-child(even) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.showcase-item:nth-child(even) .showcase-image-wrapper {
+  order: 2;
+}
+
+.showcase-item:nth-child(even) .showcase-content {
+  order: 1;
+}
+
+.showcase-image-wrapper {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  border: 1px solid var(--c-gunmetal);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.showcase-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-item:hover .showcase-image {
+  transform: scale(1.05);
+}
+
+.showcase-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--c-deep-black) 0%, transparent 5%);
+  pointer-events: none;
+}
+
+.showcase-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.showcase-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.showcase-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.showcase-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.caution-box {
+  padding: 16px 20px;
+  background-color: rgba(255, 90, 31, 0.05);
+  border-left: 2px solid var(--c-racing-orange);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.caution-box strong {
+  color: var(--c-racing-orange);
+}
+
+/* Projects Grid (All Mods) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  position: relative;
+  background-color: var(--c-rich-charcoal);
+  border: 1px solid var(--c-gunmetal);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
+}
+
+.project-card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-5px);
+}
+
+/* Varied widths for editorial look */
+.project-card:nth-child(1) { grid-column: span 8; }
+.project-card:nth-child(2) { grid-column: span 4; }
+.project-card:nth-child(3) { grid-column: span 12; }
+.project-card:nth-child(4) { grid-column: span 6; }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.project-category {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.project-version {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--c-cyan);
+}
+
+.project-desc {
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-bottom: 40px;
+  flex-grow: 1;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--c-gunmetal);
+  padding-top: 24px;
+}
+
+.project-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.project-link {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--c-gunmetal);
+  background-color: var(--c-graphite);
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+}
+
+.project-card:hover .project-link {
+  background-color: var(--text-primary);
+  color: var(--c-deep-black);
+}
+
+/* --- NEW UPCOMING / ROADMAP DESIGN --- */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  position: relative;
+}
+
+.roadmap-card {
+  background-color: rgba(18, 18, 18, 0.4);
+  border: 1px solid var(--c-gunmetal);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), background-color var(--transition-normal);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.roadmap-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--c-gunmetal);
+  transition: background-color var(--transition-normal);
+}
+
+.roadmap-card:hover {
+  transform: translateY(-8px);
+  background-color: rgba(26, 26, 26, 0.6);
+}
+
+.roadmap-card:hover::before {
+  background: linear-gradient(90deg, var(--c-racing-orange), var(--c-cyan));
+}
+
+.roadmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.roadmap-phase {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.roadmap-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.roadmap-desc {
+  color: var(--text-secondary);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.roadmap-footer {
+  margin-top: auto;
+}
+
+.roadmap-status-track {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.roadmap-status-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-cyan), var(--c-electric-blue));
+  border-radius: 2px;
+}
+
+.roadmap-status-text {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-cyan);
+  display: block;
+  text-align: right;
+}
+
+/* Status variants */
+.roadmap-card.status-testing .roadmap-status-fill {
+  background: linear-gradient(90deg, #FF7B47, var(--c-racing-orange));
+}
+.roadmap-card.status-testing .roadmap-status-text {
+  color: var(--c-racing-orange);
+}
+.roadmap-card.status-concept .roadmap-status-fill {
+  background: var(--text-muted);
+}
+.roadmap-card.status-concept .roadmap-status-text {
+  color: var(--text-muted);
+}
+
+/* Downloads Hub */
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.platform-card {
+  padding: 40px;
+  background-color: var(--c-graphite);
+  border: 1px solid var(--c-gunmetal);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.platform-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--c-cyan);
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.platform-icon {
+  font-size: 2rem;
+}
+
+.platform-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.platform-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.platform-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--c-gunmetal);
+  padding-top: 16px;
+}
+
+.platform-card:hover .platform-link {
+  color: var(--c-cyan);
+}
+
+/* About / Philosophy */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.philosophy-text p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.philosophy-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.philosophy-image-wrapper {
+  position: relative;
+  aspect-ratio: 1/1;
+  border: 1px solid var(--c-gunmetal);
+  overflow: hidden;
+}
+
+.philosophy-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.philosophy-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent, var(--c-deep-black));
+}
+
+/* Support */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.support-card {
+  padding: 32px;
+  border: 1px dashed var(--c-gunmetal);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0.6;
+}
+
+.support-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 16px 0 8px;
+}
+
+/* Info Grids (Policy, Notice) */
+.info-section {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--c-gunmetal);
+  background-color: var(--c-rich-charcoal);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-xl);
+}
+
+.info-content {
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.info-content p {
+  margin-bottom: 16px;
+}
+
+.policy-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.policy-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.policy-item::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: var(--c-cyan);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+/* --- ENHANCED FOOTER DESIGN --- */
+.footer {
+  position: relative;
+  padding: 80px 0 40px;
+  background-color: var(--c-deep-black);
+  border-top: none;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+}
+
+.footer-glow {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse at center, rgba(0, 217, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  margin-bottom: 64px;
+}
+
+.footer-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-logo-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.footer-logo-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--c-rich-charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--c-cyan);
+}
+
+.footer-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.footer-desc {
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 300px;
+  margin-bottom: 32px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--c-gunmetal);
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition: all var(--transition-normal);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.social-link:hover {
+  color: var(--c-cyan);
+  border-color: var(--c-cyan);
+  background-color: rgba(0, 217, 255, 0.05);
+  transform: translateY(-3px);
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  display: inline-block;
+  position: relative;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: var(--c-cyan);
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-col a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  transition: all var(--transition-fast);
+}
+
+.footer-col a::before {
+  content: '›';
+  margin-right: 8px;
+  color: var(--c-cyan);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all var(--transition-normal);
+}
+
+.footer-col a:hover {
+  color: var(--text-primary);
+  transform: translateX(5px);
+}
+
+.footer-col a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: var(--c-graphite);
+  border: 1px solid var(--c-gunmetal);
+  width: 100%;
+  max-width: 600px;
+  padding: 48px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform var(--transition-normal);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.modal-overlay.is-open .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+.modal-header {
+  margin-bottom: 32px;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  color: var(--c-cyan);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.progress-wrap {
+  margin-bottom: 40px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.progress-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.progress-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background-color: var(--c-gunmetal);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-electric-blue), var(--c-cyan));
+  width: 0%;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px var(--c-cyan);
+}
+
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.milestone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: var(--c-rich-charcoal);
+  border: 1px solid var(--c-gunmetal);
+}
+
+.milestone-name {
+  font-weight: 500;
+}
+
+.milestone-status {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status-complete { color: var(--text-muted); }
+.status-progress { color: var(--c-cyan); }
+.status-tba { color: var(--text-muted); opacity: 0.5; }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-title { font-size: clamp(3rem, 6vw, 5rem); }
+  .showcase-item { grid-template-columns: 1fr; gap: 32px; }
+  .showcase-item:nth-child(even) .showcase-image-wrapper { order: 1; }
+  .showcase-item:nth-child(even) .showcase-content { order: 2; }
+  .project-card:nth-child(n) { grid-column: span 6; }
+  .philosophy-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 48px; }
+  .footer-brand { grid-column: span 1; }
+  .footer-links { grid-column: span 1; justify-content: flex-start; gap: 48px; flex-wrap: wrap; }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: var(--c-deep-black);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    transform: translateY(-100%);
+    transition: transform var(--transition-normal);
+  }
+  .nav-links.is-open { transform: translateY(0); }
+  .hamburger { display: flex; }
+  .hamburger.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.is-active span:nth-child(2) { opacity: 0; }
+  .hamburger.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .project-card:nth-child(n) { grid-column: span 12; }
+  .info-grid { grid-template-columns: 1fr; }
+  .policy-list { grid-template-columns: 1fr; }
+  .modal-content { padding: 32px 24px; }
+  .footer-links { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-legal-links { flex-direction: column; gap: 8px; }
+}
+
+</style>
+  <meta name="description" content="Custom GTA V modifications, projects, and experiments by RexMods.">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <img src="https://i.ibb.co/vCDRW1jV/Logo.png" alt="RexMods Logo">
+      </div>
+      <span class="nav-brand-name">RexMods</span>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="FSSDocs.html" target="_blank">FSS Docs</a></li>
+      <li><a href="MFSDocs.html" target="_blank">MFS Docs</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#mods">Releases</a></li>
+      <li><a href="#upcoming">Upcoming</a></li>
+      <li>
+        <a href="https://discord.gg/g6uYV3J" target="_blank" rel="noopener" class="discord-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.11.131 18.16.18 18.19a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+          Join Discord
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-label hero-reveal">GTA V Modifications</div>
+        <h1 class="hero-title hero-reveal" style="animation-delay: 0.1s;">Precision<br><span class="text-gradient-blue">Craftsmanship.</span></h1>
+        <p class="hero-desc hero-reveal" style="animation-delay: 0.2s;">
+          Custom projects, dynamic HUDs, and visual experiments built with an uncompromising attention to detail. Welcome to RexMods.
+        </p>
+        <div class="hero-actions hero-reveal" style="animation-delay: 0.3s;">
+          <a href="#featured" class="btn btn-primary">View Projects</a>
+          <a href="https://discord.gg/g6uYV3J" target="_blank" rel="noopener" class="btn btn-secondary">Community Hub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Showcase -->
+  <section id="featured" class="section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label color-cyan">The Showcase</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-desc">Flagship modifications built from the ground up to deliver authentic, high-performance gameplay experiences.</p>
+      </div>
+
+      <!-- Forza Styled Speedometer -->
+      <div class="showcase-item reveal-up">
+        <div class="showcase-image-wrapper">
+          <img src="https://i.ibb.co/C34zx8RP/Screenshot-2026-07-22-194157.png" alt="Forza Styled Speedometer" class="showcase-image">
+          <div class="showcase-image-overlay"></div>
+        </div>
+        <div class="showcase-content">
+          <div class="badge badge-active">V1.2 [Legacy + Enhanced Support]</div>
+          <h3 class="showcase-title">Forza Styled Speedometer</h3>
+          <p class="showcase-desc">
+            A meticulously crafted Forza Horizon-inspired HUD for GTA V. Engineered for realistic RPM behavior, fluid animations, and a clean visual style that seamlessly integrates into the core gameplay.
+          </p>
+          <div class="showcase-features">
+            <span class="chip">Realistic RPM</span>
+            <span class="chip">Startup Sweep</span>
+            <span class="chip">Controller Support</span>
+            <span class="chip">Customizable</span>
+          </div>
+          <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px;">
+            Download Update
+          </a>
+        </div>
+      </div>
+
+      <!-- Motorfest Speedometer -->
+      <div class="showcase-item reveal-up">
+        <div class="showcase-image-wrapper">
+          <img src="https://i.ibb.co/ycdrC3H9/Screenshot-2026-07-22-194158.png" alt="Motorfest Speedometer" class="showcase-image">
+          <div class="showcase-image-overlay"></div>
+        </div>
+        <div class="showcase-content">
+          <div class="badge badge-pulled">v1.1.0 Beta</div>
+          <h3 class="showcase-title">Motorfest Speedometer</h3>
+          <p class="showcase-desc">
+            Experience the striking telemetry of The Crew Motorfest. This project brings a modern, high-precision instrument cluster complete with custom-tuned driving assists and responsive telemetry.
+          </p>
+<!--
+          <div class="caution-box">
+            <strong>⚠️ Temporarily Pulled:</strong> Discovered a crash occurring during opacity configuration. A comprehensive stability patch is currently in development.
+          </div> --->
+
+          <div class="showcase-features">
+            <span class="chip">Driving Assists</span>
+            <span class="chip">Needle Arc</span>
+            <span class="chip">Blinking Icons</span>
+          </div>
+          <button type="button" class="btn btn-secondary" onclick="openModal()" style="margin-top: 16px;">
+            View Development Status
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section id="mods" class="section" style="background-color: var(--c-deep-black);">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label">All Releases</div>
+        <h2 class="section-title">The Archive</h2>
+        <p class="section-desc">A complete catalog of published modifications, visual enhancements, and technical experiments.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card reveal-up">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">Rex Coral ReShade</h3>
+              <span class="project-category">Visual / Preset</span>
+            </div>
+            <span class="project-version">v1.0</span>
+          </div>
+          <p class="project-desc">A highly refined ReShade preset designed to enhance cinematic lighting and color grading without overwhelming the original art direction.</p>
+          <div class="project-footer">
+            <div class="project-stat">
+              <span class="stat-val text-gradient-blue">1,783+</span>
+              <span class="stat-label">Downloads</span>
+            </div>
+            <div class="project-stat">
+              <span class="stat-val">5.0</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal-up" style="transition-delay: 0.1s;">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">Loading Screens</h3>
+              <span class="project-category">Visual / UI</span>
+            </div>
+            <span class="project-version">v4.0</span>
+          </div>
+          <p class="project-desc">A complete overhaul of the initial loading sequence, designed as an exploration into OIV package creation.</p>
+          <div class="project-footer">
+            <div class="project-stat">
+              <span class="stat-val text-gradient-blue">2,060+</span>
+              <span class="stat-label">Downloads</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card reveal-up" style="transition-delay: 0.2s;">
+          <div class="project-header">
+            <div>
+              <h3 class="project-title">ReShade for NVE</h3>
+              <span class="project-category">Visual / Preset</span>
+            </div>
+            <span class="project-version">v1.0</span>
+          </div>
+          <p class="project-desc">A vibrant configuration tailored specifically for environments running NaturalVision Evolved and QuantV.</p>
+          <div class="project-footer">
+            <div class="project-stat">
+              <span class="stat-val text-gradient-orange">8,828+</span>
+              <span class="stat-label">Downloads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Roadmap -->
+  <section id="upcoming" class="section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label color-orange">The Horizon</div>
+        <h2 class="section-title">Development Roadmap</h2>
+        <p class="section-desc">Concepts in the pipeline. These represent technical explorations and potential future releases.</p>
+      </div>
+
+      <div class="roadmap-grid reveal-up">
+
+        <!-- Card 1 -->
+        <div class="roadmap-card">
+          <div class="roadmap-header">
+            <div class="badge badge-upcoming">In Works</div>
+            <span class="roadmap-phase">Phase 01</span>
+          </div>
+          <h3 class="roadmap-title">Crash Manager</h3>
+          <p class="roadmap-desc">
+            A simple easy to use crash manager that will try to identify which new additions or packs are causing gta v to crash.
+          </p>
+          <div class="caution-box" style="margin-bottom: 24px; font-size: 0.85rem; padding: 12px 16px;">
+            Developmental stage. Release pending 70% accuracy threshold.
+          </div>
+          <div class="roadmap-footer">
+            <div class="roadmap-status-track">
+              <div class="roadmap-status-fill" style="width: 45%;"></div>
+            </div>
+            <span class="roadmap-status-text">45% — Architecture Setup</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="roadmap-card status-testing">
+          <div class="roadmap-header">
+            <div class="badge badge-upcoming" style="color: var(--c-racing-orange); border-color: var(--c-racing-orange);">In Testing</div>
+            <span class="roadmap-phase">Phase 02</span>
+          </div>
+          <h3 class="roadmap-title">Forza Horizon 4 Speedometer</h3>
+          <p class="roadmap-desc">
+            An intricate HUD element inspired by the Forza Horizon 4 speedometer system, bringing dynamic arcade racing UI into Los Santos.
+          </p>
+          <div class="roadmap-footer">
+            <div class="roadmap-status-track">
+              <div class="roadmap-status-fill" style="width: 85%;"></div>
+            </div>
+            <span class="roadmap-status-text">85% — QA Testing</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="roadmap-card">
+          <div class="roadmap-header">
+            <div class="badge badge-upcoming">In Development</div>
+            <span class="roadmap-phase">Phase 03</span>
+          </div>
+          <h3 class="roadmap-title">Forza Horizon 6 Speedometer</h3>
+          <p class="roadmap-desc">
+            Expanding the FH series lineup. Inspired by next-gen telemetry designs, offering a hyper-modern instrument cluster.
+          </p>
+          <div class="roadmap-footer">
+            <div class="roadmap-status-track">
+              <div class="roadmap-status-fill" style="width: 25%;"></div>
+            </div>
+            <span class="roadmap-status-text">25% — Texture Development</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="roadmap-card status-concept">
+          <div class="roadmap-header">
+            <div class="badge badge-upcoming" style="color: var(--text-muted); border-color: var(--text-muted);">Concept Phase</div>
+            <span class="roadmap-phase">Phase 04</span>
+          </div>
+          <h3 class="roadmap-title">Forza Skill Chain</h3>
+          <p class="roadmap-desc">
+            Inspired by FH5's Skill Chain system. Aiming to introduce a continuous scoring streak mechanic for dynamic driving stunts.
+          </p>
+          <div class="roadmap-footer">
+            <div class="roadmap-status-track">
+              <div class="roadmap-status-fill" style="width: 10%;"></div>
+            </div>
+            <span class="roadmap-status-text">10% — Feasibility Study</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads & Support -->
+  <section id="downloads" class="section" style="background-color: var(--c-deep-black);">
+    <div class="container">
+
+      <div class="section-header reveal-up">
+        <div class="section-label">Distribution</div>
+        <h2 class="section-title">Official Channels</h2>
+        <p class="section-desc">To ensure integrity and access to the latest patches, modifications are exclusively distributed across these verified platforms.</p>
+      </div>
+
+      <div class="downloads-grid reveal-up">
+        <a href="https://www.gta5-mods.com/users/REX%20MODS" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-header">
+            <span class="platform-icon">🎮</span>
+            <span class="platform-name">GTA5-Mods</span>
+          </div>
+          <p class="platform-desc">The primary distribution hub for all major releases and updates under the RexMods profile.</p>
+          <div class="platform-link">Visit Profile <span>→</span></div>
+        </a>
+
+        <a href="https://www.gtainside.com/user/Rex%20Mods" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-header">
+            <span class="platform-icon">🕹️</span>
+            <span class="platform-name">GTAInside</span>
+          </div>
+          <p class="platform-desc">An alternative archive hosting select projects and visual configurations.</p>
+          <div class="platform-link">Visit Profile <span>→</span></div>
+        </a>
+
+        <a href="https://www.nexusmods.com/profile/Rexxsachx" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-header">
+            <span class="platform-icon">⚙️</span>
+            <span class="platform-name">Nexus Mods</span>
+          </div>
+          <p class="platform-desc">High-speed mirrors and structured version tracking under the Rexxsachx handle.</p>
+          <div class="platform-link">Visit Profile <span>→</span></div>
+        </a>
+              <a href="https://libertycity.net/user/Rexxsachx/" target="_blank" rel="noopener" class="platform-card">
+          <div class="platform-header">
+            <span class="platform-icon">🏢</span>
+            <span class="platform-name">LibertyCity</span>
+          </div>
+          <p class="platform-desc">High-speed mirrors also available on LibertyCity under the username Rexxsachx.</p>
+          <div class="platform-link">Visit Profile <span>→</span></div>
+        </a>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Philosophy & About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-label">Philosophy</div>
+        <h2 class="section-title">Design Principles</h2>
+      </div>
+
+      <div class="philosophy-grid reveal-up">
+        <div class="philosophy-text">
+          <p>The goal has never been to simply add features to a game, but to engineer additions that feel entirely native to the experience.</p>
+          <p>Every project begins with a focus on <strong>technical craftsmanship</strong>—writing clean logic, optimizing draw calls, and ensuring rock-solid stability before any visual polish is applied.</p>
+          <p>From the precise curve of a digital needle to the specific timing of an animation, the objective is to build premium modifications that elevate the standard of what players expect from community-driven development.</p>
+        </div>
+        <div class="philosophy-image-wrapper">
+          <!-- A sleek abstract placeholder for philosophy -->
+          <img src="https://i.ibb.co/LhxZMYS3/loadingnewsscreenbg5.png" alt="Abstract Code Detail" style="filter: grayscale(100%) contrast(1.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal & Info -->
+  <section class="info-section">
+    <div class="container">
+
+      <!-- Policy -->
+      <div class="info-grid reveal-up" style="margin-bottom: var(--space-2xl);">
+        <div>
+          <h3 class="section-label color-cyan">Distribution Policy</h3>
+        </div>
+        <div class="info-content">
+          <div class="policy-list">
+            <div class="policy-item">Do not redistribute or mirror files without explicit authorization.</div>
+            <div class="policy-item">Inclusion in public mod packs requires prior consent.</div>
+            <div class="policy-item">Do not distribute modified variants as standalone releases.</div>
+            <div class="policy-item">Always link directly to official download pages rather than sharing files.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="info-grid reveal-up">
+        <div>
+          <h3 class="section-label">Intellectual Property Notice</h3>
+        </div>
+        <div class="info-content">
+          <p>Projects showcased here may draw inspiration from user interfaces and visual aesthetics found in modern gaming.</p>
+          <p>All modifications are fan-made creations engineered independently from scratch. No assets, code, or proprietary files are extracted or copied from commercial titles. Visual references are used strictly to study design language, proportions, and lighting to create original assets tailored for GTA V.</p>
+          <p>These independent projects are not endorsed, sponsored, or affiliated with any game developer or publisher. All trademarks and brand names remain the property of their respective owners.</p>
+          <p style="margin-top: 24px;">
+            <a href="mailto:rexxsachx@proton.me" style="color: var(--c-cyan); text-decoration: underline;">Contact for Inquiries</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Enhanced Footer -->
+  <footer class="footer">
+    <div class="footer-glow"></div>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand-wrap">
+          <div class="footer-logo-box">
+            <div class="footer-logo-icon">
+              <!-- Inline SVG for logo icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span class="footer-logo-text">RexMods</span>
+          </div>
+          <p class="footer-desc">
+            Precision craftsmanship and uncompromising attention to detail. Delivering native, high-performance GTA V modifications and visual experiences.
+          </p>
+          <div class="footer-socials">
+            <a href="https://discord.gg/g6uYV3J" target="_blank" rel="noopener" class="social-link" aria-label="Discord">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.11.131 18.16.18 18.19a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+            </a>
+            <a href="mailto:rexxsachx@proton.me" class="social-link" aria-label="Email">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#hero">Overview</a></li>
+              <li><a href="#featured">Showcase</a></li>
+              <li><a href="#mods">Archive</a></li>
+              <li><a href="#upcoming">Roadmap</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Platforms</h4>
+            <ul>
+              <li><a href="https://www.gta5-mods.com/users/REX%20MODS" target="_blank" rel="noopener">GTA5-Mods</a></li>
+              <li><a href="https://www.gtainside.com/user/Rex%20Mods" target="_blank" rel="noopener">GTAInside</a></li>
+              <li><a href="https://www.nexusmods.com/profile/Rexxsachx" target="_blank" rel="noopener">Nexus Mods</a></li>
+              <li><a href="https://libertycity.net/user/Rexxsachx" target="_blank" rel="noopener">LibertyCity</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Documentation</h4>
+            <ul>
+              <li><a href="FSSDocs.html" target="_blank">FSS API Docs</a></li>
+              <li><a href="MFSDocs.html" target="_blank">MFS Integration</a></li>
+              <li><a href="#about">Design Philosophy</a></li>
+              <li><a href="#">Support Center</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 RexMods. All rights reserved.</span>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <span>Download only from verified sources.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Progress Modal -->
+  <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <div class="modal-header">
+        <div class="modal-subtitle">Development Status</div>
+        <h3 class="modal-title">Motorfest Speedometer</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Target Release: v1.1.0</p>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span class="progress-label">System Architecture</span>
+          <span class="progress-val">100%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="milestone-list">
+        <div class="milestone">
+          <span class="milestone-name">v1.0.1 Crash Fix</span>
+          <span class="milestone-status status-complete">Completed</span>
+        </div>
+        <div class="milestone">
+          <span class="milestone-name">Nitro Core Logic</span>
+          <span class="milestone-status status-complete">Completed</span>
+        </div>
+        <div class="milestone">
+          <span class="milestone-name">Draw Calls & Visual Polish</span>
+          <span class="milestone-status status-complete">Completed</span>
+        </div>
+        <div class="milestone">
+          <span class="milestone-name" >v1.1.0 Testing</span>
+          <span class="milestone-status status-complete">Completed</span>
+        </div>
+        <div class="milestone" style="border-color: var(--c-cyan);">
+          <span class="milestone-name" style="color: var(--text-primary);">v1.1.0 Beta</span>
+          <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="btn btn-third">
+            Download
+          </a>
+        </div>
+      </div>
+
+      <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+        Versions 1.0 and 1.0.1 have been deprecated. The upcoming <strong>v1.1.0</strong> architecture consolidates critical stability patches, focusing on zero-latency telemetry rendering to mirror the high-performance dashboard experience of the original title.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.8rem; text-align: right; margin-top: 24px;">
+        Last updated: July 2026
+      </p>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Navigation Scroll Effect
+  const navbar = document.getElementById('navbar');
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    // Add background blur when scrolled past 50px
+    if (currentScrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+    lastScrollY = currentScrollY;
+  }, { passive: true });
+
+
+  // Mobile Menu Toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('is-active');
+      navLinks.classList.toggle('is-open');
+    });
+  }
+
+  // Close mobile menu on link click
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('is-active');
+      navLinks.classList.remove('is-open');
+    });
+  });
+
+
+  // Hero Parallax Effect
+  const heroBg = document.getElementById('hero-bg');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    // Only apply parallax if hero is visible (approx viewport height)
+    if (scrollY < window.innerHeight && heroBg) {
+      heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+    }
+  }, { passive: true });
+
+
+  // Scroll Reveal Animations
+  const revealElements = document.querySelectorAll('.reveal-up');
+
+  // Fallback: If observer is not supported, show all elements
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const revealObserverOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.05
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, revealObserverOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
+});
+
+// Modal Logic
+function openModal() {
+  const modal = document.getElementById('modalOverlay');
+  const progressFill = document.getElementById('progressFill');
+
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+  // Trigger progress bar animation after slight delay
+  setTimeout(() => {
+    if (progressFill) {
+      progressFill.style.width = '100%';
+    }
+  }, 100);
+}
+
+function closeModal() {
+  const modal = document.getElementById('modalOverlay');
+  const progressFill = document.getElementById('progressFill');
+
+  modal.classList.remove('is-open');
+  document.body.style.overflow = '';
+
+  // Reset progress bar
+  setTimeout(() => {
+    if (progressFill) {
+      progressFill.style.width = '0%';
+    }
+  }, 400); // Wait for modal close transition
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('modalOverlay');
+    if (modal && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  }
+});
+
+</script>
+</body>
+</html>
