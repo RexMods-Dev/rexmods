@@ -519,41 +519,72 @@ button {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .project-card {
   position: relative;
   background-color: var(--c-rich-charcoal);
   border: 1px solid var(--c-gunmetal);
-  padding: 40px;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: border-color var(--transition-normal), transform var(--transition-normal);
 }
 
 .project-card:hover {
-  border-color: var(--text-muted);
-  transform: translateY(-5px);
+  border-color: var(--c-cyan);
+  transform: translateY(-4px);
+}
+
+.project-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--c-graphite);
+  border-bottom: 1px solid var(--c-gunmetal);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.03);
+}
+
+.project-body {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .project-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.75rem;
+  font-size: 1.45rem;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  line-height: 1.15;
 }
 
 .project-category {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -562,14 +593,16 @@ button {
 .project-version {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--c-cyan);
 }
 
 .project-desc {
   color: var(--text-secondary);
   font-weight: 300;
-  margin-bottom: 40px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
   flex-grow: 1;
 }
 
@@ -578,7 +611,8 @@ button {
   justify-content: space-between;
   align-items: flex-end;
   border-top: 1px solid var(--c-gunmetal);
-  padding-top: 24px;
+  padding-top: 16px;
+  margin-top: auto;
 }
 
 .project-stat {
@@ -589,20 +623,22 @@ button {
 .stat-val {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   color: var(--text-primary);
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .project-link {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1125,112 +1161,128 @@ button {
       <div class="projects-grid">
         <!-- Forza Styled -->
         <div class="project-card reveal-up" style="grid-column: span 6;">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Forza Styled Speedometer</h3>
-              <span class="project-category">HUD / Interface</span>
-            </div>
-            <span class="project-version">v1.3</span>
+          <div class="project-image-wrap">
+            <img src="https://i.ibb.co/qYzQ57JS/GTA5-Enhanced-2026-08-19-20-13-14.png" alt="Forza Styled Speedometer" class="project-image">
           </div>
-          <p class="project-desc">A meticulously crafted Forza Horizon-inspired HUD for GTA V. Engineered for realistic RPM behavior, fluid animations, and a clean visual style.</p>
-          <div class="project-footer">
-            <div class="project-stat">
-              <span class="stat-val text-gradient-blue">4,000+</span>
-              <span class="stat-label">Downloads</span>
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">Forza Styled Speedometer</h3>
+                <span class="project-category">HUD / Interface</span>
+              </div>
+              <span class="project-version">v1.3</span>
             </div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <button onclick="openModal('forza')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 10px 20px;">Dev Status</button>
-              <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="project-link">
-                ↓
-              </a>
+            <p class="project-desc">A meticulously crafted Forza Horizon-inspired HUD for GTA V. Engineered for realistic RPM behavior, fluid animations, and a clean visual style.</p>
+            <div class="project-footer">
+              <div class="project-stat">
+                <span class="stat-val text-gradient-blue">4,000+</span>
+                <span class="stat-label">Downloads</span>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="openModal('forza')" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 16px;">Dev Status</button>
+                <a href="https://www.gta5-mods.com/scripts/forza-styled-speedometer" target="_blank" rel="noopener" class="project-link" aria-label="Download Forza Speedometer">
+                  ↓
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Motorfest -->
         <div class="project-card reveal-up" style="grid-column: span 6;">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Motorfest Speedometer</h3>
-              <span class="project-category">HUD / Interface</span>
-            </div>
-            <span class="project-version">v1.0.1 Beta</span>
+          <div class="project-image-wrap">
+            <img src="https://i.ibb.co/LDtdzbD1/GTA5-2026-07-23-20-35-11.png" alt="Motorfest Speedometer" class="project-image">
           </div>
-          <p class="project-desc">Experience the striking telemetry of The Crew Motorfest. This project brings a modern, high-precision instrument cluster complete with custom-tuned driving assists.</p>
-          <div class="project-footer">
-            <div class="project-stat">
-              <span class="stat-val text-gradient-blue">1000+</span>
-              <span class="stat-label">Downloads</span>
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">Motorfest Speedometer</h3>
+                <span class="project-category">HUD / Interface</span>
+              </div>
+              <span class="project-version">v1.0.1 Beta</span>
             </div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <button onclick="openModal('motorfest')" class="btn btn-secondary" style="font-size: 0.85rem; padding: 10px 20px;">Dev Status</button>
-              <a href="https://www.gta5-mods.com/scripts/motorfest-speedometer-rex-mods" target="_blank" rel="noopener" class="project-link">
+            <p class="project-desc">Experience the striking telemetry of The Crew Motorfest. This project brings a modern, high-precision instrument cluster complete with custom-tuned driving assists.</p>
+            <div class="project-footer">
+              <div class="project-stat">
+                <span class="stat-val text-gradient-blue">1000+</span>
+                <span class="stat-label">Downloads</span>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="openModal('motorfest')" class="btn btn-secondary" style="font-size: 0.8rem; padding: 8px 16px;">Dev Status</button>
+                <a href="https://www.gta5-mods.com/scripts/motorfest-speedometer-rex-mods" target="_blank" rel="noopener" class="project-link" aria-label="Download Motorfest Speedometer">
+                  ↓
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ReShade NVE -->
+        <div class="project-card reveal-up" style="grid-column: span 4;">
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">ReShade for NVE</h3>
+                <span class="project-category">Visual / Preset</span>
+              </div>
+              <span class="project-version">v1.0</span>
+            </div>
+            <p class="project-desc">A vibrant configuration tailored specifically for environments running NaturalVision Evolved and QuantV.</p>
+            <div class="project-footer">
+              <div class="project-stat">
+                <span class="stat-val text-gradient-orange">9,000+</span>
+                <span class="stat-label">Downloads</span>
+              </div>
+              <a href="https://www.gta5-mods.com/misc/reshade-preset-for-nve-quantv-colourful" target="_blank" rel="noopener" class="project-link" aria-label="Download ReShade for NVE">
                 ↓
               </a>
             </div>
           </div>
         </div>
 
-        <!-- ReShade NVE -->
-        <div class="project-card reveal-up" style="grid-column: span 12;">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">ReShade for NVE</h3>
-              <span class="project-category">Visual / Preset</span>
-            </div>
-            <span class="project-version">v1.0</span>
-          </div>
-          <p class="project-desc">A vibrant configuration tailored specifically for environments running NaturalVision Evolved and QuantV.</p>
-          <div class="project-footer">
-            <div class="project-stat">
-              <span class="stat-val text-gradient-orange">9,000+</span>
-              <span class="stat-label">Downloads</span>
-            </div>
-            <a href="https://www.gta5-mods.com/misc/reshade-preset-for-nve-quantv-colourful" target="_blank" rel="noopener" class="project-link">
-              ↓
-            </a>
-          </div>
-        </div>
-
         <!-- Loading Screens -->
-        <div class="project-card reveal-up" style="grid-column: span 6;">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Loading Screens</h3>
-              <span class="project-category">Visual / UI</span>
+        <div class="project-card reveal-up" style="grid-column: span 4;">
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">Loading Screens</h3>
+                <span class="project-category">Visual / UI</span>
+              </div>
+              <span class="project-version">v4.0</span>
             </div>
-            <span class="project-version">v4.0</span>
-          </div>
-          <p class="project-desc">A complete overhaul of the initial loading sequence, designed as an exploration into OIV package creation.</p>
-          <div class="project-footer">
-            <div class="project-stat">
-              <span class="stat-val text-gradient-blue">2,100+</span>
-              <span class="stat-label">Downloads</span>
+            <p class="project-desc">A complete overhaul of the initial loading sequence, designed as an exploration into OIV package creation.</p>
+            <div class="project-footer">
+              <div class="project-stat">
+                <span class="stat-val text-gradient-blue">2,100+</span>
+                <span class="stat-label">Downloads</span>
+              </div>
+              <a href="https://www.gta5-mods.com/misc/loading-screen-replace" target="_blank" rel="noopener" class="project-link" aria-label="Download Loading Screens">
+                ↓
+              </a>
             </div>
-            <a href="https://www.gta5-mods.com/misc/loading-screen-replace" target="_blank" rel="noopener" class="project-link">
-              ↓
-            </a>
           </div>
         </div>
 
         <!-- Rex Coral ReShade -->
-        <div class="project-card reveal-up" style="grid-column: span 6;">
-          <div class="project-header">
-            <div>
-              <h3 class="project-title">Rex Coral ReShade</h3>
-              <span class="project-category">Visual / Preset</span>
+        <div class="project-card reveal-up" style="grid-column: span 4;">
+          <div class="project-body">
+            <div class="project-header">
+              <div>
+                <h3 class="project-title">Rex Coral ReShade</h3>
+                <span class="project-category">Visual / Preset</span>
+              </div>
+              <span class="project-version">v1.0</span>
             </div>
-            <span class="project-version">v1.0</span>
-          </div>
-          <p class="project-desc">A highly refined ReShade preset designed to enhance cinematic lighting and color grading without overwhelming the original art direction.</p>
-          <div class="project-footer">
-            <div class="project-stat">
-              <span class="stat-val text-gradient-blue">1,800+</span>
-              <span class="stat-label">Downloads</span>
+            <p class="project-desc">A highly refined ReShade preset designed to enhance cinematic lighting and color grading without overwhelming original art direction.</p>
+            <div class="project-footer">
+              <div class="project-stat">
+                <span class="stat-val text-gradient-blue">1,800+</span>
+                <span class="stat-label">Downloads</span>
+              </div>
+              <a href="https://www.gta5-mods.com/misc/rex-coral-reshade" target="_blank" rel="noopener" class="project-link" aria-label="Download Rex Coral ReShade">
+                ↓
+              </a>
             </div>
-            <a href="https://www.gta5-mods.com/misc/rex-coral-reshade" target="_blank" rel="noopener" class="project-link">
-              ↓
-            </a>
           </div>
         </div>
 
