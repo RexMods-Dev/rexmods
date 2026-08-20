@@ -570,7 +570,7 @@
             <h1>Forza Styled Speedometer</h1>
             <div class="doc-meta">
                 <span class="meta-tag">By RexMods</span>
-                <span class="meta-tag active">Version 1.2</span>
+                <span class="meta-tag active">Version 1.3</span>
                 <span class="meta-tag" id="readTime">5 min read</span>
             </div>
         </div>
@@ -580,13 +580,13 @@
             <div class="toc-title">Contents Index</div>
             <ol>
                 <li><a href="#overview">Overview</a></li>
-                <li><a href="#whats-new">What's New in v1.2</a></li>
+                <li><a href="#whats-new">What's New in v1.3</a></li>
                 <li><a href="#requirements">Requirements</a></li>
                 <li><a href="#official-download">Official Download &amp; Support</a></li>
-                <li><a href="#enhanced-compatibility">GTA V Enhanced Compatibility</a></li>
                 <li><a href="#installation">Installation (Legacy)</a></li>
                 <li><a href="#installation-enhanced">Installation (Enhanced)</a></li>
-                <li><a href="#updating">Updating from v1.1</a></li>
+                <li><a href="#updating">Updating from v1.2</a></li>
+                <li><a href="#support">Support &amp; Troubleshooting</a></li>
                 <li><a href="#controls">Default Controls</a></li>
                 <li><a href="#driving-aids">Driving Aids</a></li>
                 <li><a href="#ini-reference">Settings File Guide</a></li>
@@ -598,30 +598,38 @@
         <section id="overview">
             <h2>Overview</h2>
             <p>A fully customizable <strong>Forza Horizon 5-style</strong> speedometer for GTA V. The needle moves when you start the engine, follows your RPM smoothly, vibrates when you hit the rev limit, and shows your speed clearly.</p>
-            <p>Driving assists — like <strong>ABS</strong>, <strong>Traction Control</strong>, and <strong>Launch Control</strong> — work in the background and blink on the gauge when active. You can change all settings from the in-game menu by pressing <code>F11</code>.</p>
+            <p>Driving assists like <strong>ABS</strong>, <strong>Traction Control</strong> and <strong>Launch Control</strong> work in the background and blink on the gauge when active. You can change all settings from the in-game menu by pressing <code>F11</code>.</p>
         </section>
 
-        <!-- What's New in v1.2 -->
+        <!-- What's New in v1.3 -->
         <section id="whats-new">
-            <h2>What's New in v1.2</h2>
+            <h2>What's New in v1.3</h2>
 
             <h3>New Features</h3>
             <ul>
-                <li><strong>Controller vibration</strong> when you hit the redline — you can adjust how strong it is or turn it off entirely <em>[Experimental]</em></li>
-                <li><strong>Open the menu with a controller</strong> <em>[Experimental]</em></li>
-                <li><strong>Two ways to show speed:</strong> standard text or high-quality custom numbers (both can be moved and resized)</li>
-                <li><strong>Hide default GTA V text</strong> — remove the game's default street and vehicle names for a cleaner screen</li>
-                <li><strong>Reload Settings button</strong> — apply changes you made to the settings file without restarting the game</li>
-                <li><strong>Better error tracking</strong> to help find problems if the mod crashes</li>
-                <li><strong>Welcome Guide</strong> — shows your controls and file locations the first time you use the mod; reopen it anytime from the menu</li>
+                <li><strong>Dynamic RPM gauge tiers</strong> from 7,000 to 11,000 RPM to dynamically match individual vehicle redlines.</li>
+                <li><strong>IKT's Manual Transmission support:</strong> Seamlessly switch the gear data source between native <strong>Game</strong> detection and <strong>IKT's</strong>.</li>
+                <li><strong>Turn indicators:</strong> Added left, right, and hazard light signals with a toggle to enable or disable them.</li>
+                <li><strong>Manual engine start audio:</strong> Added support to use the native engine start audio during manual engine start.</li>
+                <li><strong>Interruptible ignition sweep:</strong> You can now start the engine immediately without waiting for the gauge sweep to complete its full rotation.</li>
+                <li><strong>Reset to Default:</strong> Quickly restore your HUD configuration values to their factory settings.</li>
+                <li><strong>Custom license plate:</strong> Optional setting configurable directly through <code>FSS.ini</code>.</li>
             </ul>
 
-            <h3>Improvements & Stability</h3>
+            <h3>Improvements</h3>
             <ul>
-                <li>Smoother needle movement when starting or turning off the engine</li>
-                <li>More layout options and a smoother gear number display that doesn't flicker</li>
-                <li>The mod runs faster and smoother overall</li>
-                <li>Fixed small game freezes that happened when quickly changing menu settings</li>
+                <li>Refined <strong>ABS and TCS</strong> intervention behaviour and reorganized their assist modes.</li>
+                <li><strong>Launch Control</strong> is now processed internally by the script and no longer requires separate modes in the menu.</li>
+                <li>Corrected <strong>ABS brake-light behaviour</strong> so brake lights illuminate normally while braking, even when ABS is active.</li>
+                <li>Improved <strong>Center Hub and gear indicator redline syncing</strong> across all supported RPM tiers.</li>
+                <li>Smarter vehicle-state handling: Parked vehicles remain off by default, while NPC-stolen vehicles stay active.</li>
+                <li>Enhanced overall layout handling and configuration stability for the HUD.</li>
+            </ul>
+
+            <h3>Stability & Known Limitations</h3>
+            <ul>
+                <li><strong>Extensively Tested:</strong> This build has undergone prolonged gameplay testing (high-speed driving, hard braking, rapid acceleration, engine cycling, menu usage) across both <strong>GTA V Legacy</strong> and <strong>GTA V Enhanced</strong> editions.</li>
+                <li><strong>8-Speed Transmission Skip (Limitation):</strong> On some upgraded 8-speed vehicles, GTA V's native gear detection may skip 7th gear (jumping from 6th to 8th, or 7th showing briefly for 0.5s). This is a native game limitation rather than a speedometer issue. It is recommended to use <strong>IKT's Custom Gear Ratio</strong> as a workaround for affected vehicles.</li>
             </ul>
         </section>
 
@@ -649,28 +657,12 @@
             <div class="warning">
                 <div class="callout-label">Security Notice</div>
                 <strong>If you downloaded this mod from somewhere else, it is not an official copy.</strong><br><br>
-                Files from other websites might be old, broken, or contain viruses. I cannot help you fix crashes or computer problems if you use unofficial downloads.<br><br>
+                Files from other websites might be old, broken, or contain viruses. I cannot help you fix crashes or other issues if you use unofficial downloads.<br><br>
                 I only provide support if you downloaded the mod from the trusted sites listed above.
             </div>
         </section>
 
-        <!-- GTA V Enhanced Compatibility Notice -->
-        <section id="enhanced-compatibility">
-            <h2>GTA V Enhanced Compatibility</h2>
-            <p>The texture files included in this mod have been updated to work with <strong>GTA V Enhanced</strong>. They work well in our tests. However, because everyone uses different mods and installs them in different orders, it might not work perfectly for everyone.</p>
 
-            <div class="note">
-                <div class="callout-label">Fixing Graphics Issues</div>
-                If you see missing graphics, black boxes, or other visual glitches:
-                <ol>
-                    <li>Close the OpenIV program completely.</li>
-                    <li>Restart GTA V.</li>
-                    <li>You might need to do this up to three times. This helps the game reload the new files correctly.</li>
-                </ol>
-            </div>
-
-            <p>If it still doesn't work, undo the changes you made in OpenIV and use the older (Legacy) version of the mod instead.</p>
-        </section>
 
         <!-- Installation -->
         <section id="installation">
@@ -679,8 +671,8 @@
                 <li>Install the required base mods: <strong>Script Hook V</strong>, <strong>Script Hook V .NET</strong>, and <strong>LemonUI</strong>.
                     <br>Put the file named <code>LemonUI.SHVDN3.dll</code> into your GTA V <code>scripts</code> folder.
                 </li>
-                <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> from the <strong>Forza</strong> script folder into your GTA V <code>scripts</code> folder.</li>
-                <li>Using OpenIV, open the <strong>Legacy</strong> folder in our download. Drag and drop the <code>ForzaSpeedometerFH5.ytd</code> file into this path in OpenIV:
+                <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> from the <strong>scripts</strong> folder into your GTA V <code>scripts</code> folder.</li>
+                <li>Using OpenIV, open the <strong>Legacy</strong> folder in our download. Drag and drop the <code>ForzaDigits.ytd</code> and <code>ForzaHUD.ytd</code> files into this path in OpenIV:
                     <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
                 </li>
                 <li>Start the game and press <code>F11</code> to open the mod settings.</li>
@@ -694,7 +686,7 @@
             <ol>
                 <li>Install the base mods: <strong>Script Hook V</strong>, <strong>Script Hook V .NET</strong>, and <strong>LemonUI</strong>.</li>
                 <li>Copy <code>FSS.dll</code> and <code>FSS.ini</code> to your GTA V <code>scripts</code> folder.</li>
-                <li>Using OpenIV, open the <strong>Enhanced</strong> folder from our download. Drag and drop the <code>ForzaSpeedometerFH5.ytd</code> file into this path in OpenIV:
+                <li>Using OpenIV, open the <strong>Enhanced</strong> folder from our download. Drag and drop the <code>ForzaDigits.ytd</code> and <code>ForzaHUD.ytd</code> files into this path in OpenIV:
                     <pre>mods\update\update.rpf\x64\data\cdimages\scaleform_generic.rpf\</pre>
                 </li>
                 <li>Install the <strong>RageOpenV</strong> and <strong>DirectStorageFix</strong> mods by putting their files in your main GTA V folder.</li>
@@ -704,12 +696,20 @@
 
         <!-- Updating -->
         <section id="updating">
-            <h2>Updating from v1.1</h2>
+            <h2>Updating from v1.2</h2>
             <ol>
-                <li>Delete the old <code>FSS.dll</code> and <code>FSS.ini</code> files from your <code>scripts</code> folder. In OpenIV, delete the old <code>ForzaSpeedometerFH5.ytd</code> from your <code>scaleform_generic.rpf</code> file.</li>
-                <li>Install the new files following the installation instructions above.</li>
+                <li>Delete the old <code>FSS.dll</code> and <code>FSS.ini</code> files from your <code>scripts</code> folder.</li>
+                <li>In OpenIV, open your <code>scaleform_generic.rpf</code> file and <strong>delete the old <code>ForzaSpeedometerFH5.ytd</code> file</strong>.</li>
+                <li>Install the new files (including both <code>ForzaDigits.ytd</code> and <code>ForzaHUD.ytd</code>) following the installation instructions above.</li>
                 <li>Start the game to finish the update.</li>
             </ol>
+        </section>
+
+        <!-- Support & Troubleshooting -->
+        <section id="support">
+            <h2>Support &amp; Troubleshooting</h2>
+            <p>In case of any bugs, issues, or if you need help with installation, please join my Discord server and open a support ticket.</p>
+            <p><a href="https://discord.gg/g6uYV3J" target="_blank" rel="noopener"><strong>Join the Rex Mods Discord Server</strong></a></p>
         </section>
 
         <!-- Controls -->
@@ -718,6 +718,8 @@
             <p>You can change all of these buttons in the <strong>in-game menu</strong> or by editing the <code>FSS.ini</code> file.</p>
 
             <h3>Keyboard</h3>
+            <p>For custom key mapping, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=windowsdesktop-10.0" target="_blank" rel="noopener">Microsoft KeyCode List</a>.</p>
+            
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -780,7 +782,7 @@
                             <tr>
                                 <td>EngineKey</td>
                                 <td>Z</td>
-                                <td>Keyboard Key</td>
+                                <td>Keyboard Key (<a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=windowsdesktop-10.0" target="_blank" rel="noopener">List</a>)</td>
                                 <td>The key used to turn the engine on and off.</td>
                             </tr>
                             <tr>
